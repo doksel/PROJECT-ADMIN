@@ -1,0 +1,16 @@
+{
+  "ignore": ["node_modules"],
+  "env": {
+    "NODE_ENV": "development",
+    "BABEL_DISABELE_CACHE": 1,
+    "PORT": 4000,
+    "URL": "http://localhost",
+    "ENDPOINT_URL": "/graphql",
+    "MONGO_URL": "mongodb://localhost:27017/blog"
+  },
+  "execMap": {
+    "js": "babel-node"
+  },
+  "ext": ".js,.json,.gql",
+  "watch": "./"
+}
