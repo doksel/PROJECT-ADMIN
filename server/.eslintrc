@@ -10,28 +10,16 @@
     "react/react-in-jsx-scope": 0,
     "react-hooks/exhaustive-deps": "off"
   },
-  "settings": {
-    "import/resolver": "webpack",
-    "react": {
-      "createClass": "createReactClass",
-      "pragma": "React",
-      "version": "16.8.6"
-    },
-    "propWrapperFunctions": ["forbidExtraProps"],
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
-  },
   "extends": [
-    "react-app",
     "plugin:prettier/recommended",
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 7,
     "ecmaFeatures": {
       "experimentalDecorators": true,
-      "jsx": true
+      "js": true
     },
     "sourceType": "module"
   }
