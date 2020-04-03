@@ -8,7 +8,7 @@ const DefaultRoute = ({ user }) => {
   if (user) {
     path = "admin";
   } else {
-    path = "login";
+    path = "auth/login";
   }
 
   return <Redirect to={path} />;

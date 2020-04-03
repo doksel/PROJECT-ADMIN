@@ -20,9 +20,11 @@ const App = () => {
             <Layout >
               <Switch>
                 <Route path="/" exact component={DefaultRoute} /> <GuestRoute path="/login" exact component={Auth} />
-
+                
+                <GuestRoute path="/auth/:type" exact component={Auth} />
+                
                 <PrivateRoute
-                  path="/admin"
+                  path="/admin/:category?/:action?/:id?"
                   exact
                   component={Admin}
                 />

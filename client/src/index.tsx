@@ -7,7 +7,6 @@ import { Router } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import ruRU from "antd/es/locale/ru_RU";
 
-// import App from "./App";
 import { App } from "./routes/loadable";
 import * as serviceWorker from "./serviceWorker";
 import { store, history, persistor } from "./store/store";
