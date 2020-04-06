@@ -11,7 +11,7 @@ import { App } from "./routes/loadable";
 import * as serviceWorker from "./serviceWorker";
 import { store, history, persistor } from "./store/store";
 
-import "./index.css";
+import "./index.less";
 
 ReactDOM.render(
   <React.StrictMode>

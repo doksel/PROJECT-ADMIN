@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const WrapForm = styled.div`
+export const WrapForm = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,11 +27,11 @@ const WrapForm = styled.div`
   }
 `;
  
-const WrapButton = styled.div`
+export const WrapButton = styled.div`
   margin-top: 60px;
 `;
 
-const WrapInput = styled.div`
+export const WrapInput = styled.div`
   position: absolute;
   top: 50%;
   right: 10px;
@@ -39,7 +39,3 @@ const WrapInput = styled.div`
     width: 22px;
   }
 `;
-
-export default {
-  WrapForm, WrapButton, WrapInput
-}

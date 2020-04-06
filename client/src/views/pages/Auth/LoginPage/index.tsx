@@ -1,26 +1,27 @@
-import React, { useState } from "react";
-import { reduxForm, Field, InjectedFormProps } from "redux-form";
-import { Form, Button, message } from "antd";
+import React, { useState, FormEvent } from "react";
+import { reduxForm, InjectedFormProps } from "redux-form";
+import { message } from "antd";
 
-import Input from "../../../common/Input";
+import Form from "./Form";
 
 import { ERROR_MESSAGE } from "../../../../helpers/values";
-import { required } from "../../../../helpers/validate";
 
-import Styles from "./styles";
+import { WrapForm } from "./styles";
 
 interface CustomProps {}
 
-const LoginPage: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = ({
+const LoginPage: React.FC<InjectedFormProps<{}, CustomProps> & CustomProps> = ({
   handleSubmit
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const formSubmit = (e: any) => {
+  const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     handleSubmit(values => {
       setLoading(true);
+
+      console.log(values);
 
       // return signIn(values)
       //   .then(() => {
@@ -34,33 +35,9 @@ const LoginPage: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = ({
     })();
   };
   return (
-    <Styles.WrapForm>
-      <form autoComplete="off" onSubmit={formSubmit}>
-        <h1>Sing in</h1>
-        <Field
-          name="email"
-          component={Input}
-          label="email"
-          placeholder=""
-          validate={[required]}
-          icon="user"
-        />
-
-        <Field
-          name="password"
-          type="password"
-          component={Input}
-          label="password"
-          placeholder=""
-          validate={[required]}
-          icon="far fa-user"
-        />
-
-        <Button htmlType="submit" type="primary" loading={loading}>
-          Увійти
-        </Button>
-      </form>
-    </Styles.WrapForm>
+    <WrapForm>
+      <Form onSubmit={formSubmit} loading={loading} />
+    </WrapForm>
   );
 };
 

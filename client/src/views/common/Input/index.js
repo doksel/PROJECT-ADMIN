@@ -27,6 +27,7 @@ const Input = ({
         hasFeedback
         validateStatus={touched ? (error ? "error" : "success") : ""}
         className={`create-form-item ${touched && error ? "has-error" : ""}`}
+        style={{ width: "100%" }}
       >
         {label === "empty" ? (
           <label>&nbsp;</label>
@@ -45,7 +46,6 @@ const Input = ({
       value={value}
       onChange={e=>setValue(e.target.value)
       }
-    
     />
 
 
