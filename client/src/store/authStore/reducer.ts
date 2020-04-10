@@ -2,35 +2,30 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
-  USER_LOGOUT_REQUEST,
-  USER_LOGOUT_SUCCESS,
-  USER_LOGOUT_FAIL
+  USER_LOGOUT
 } from "./selectors";
 
 const initialState = {
   email: "",
   password: "",
-  token: null,
+  token: null as string | null,
   admin: false,
   isLoading: false,
   error: false
 };
 
 export type InitialStateType = typeof initialState;
-// export type InitialType =
-//    typeof USER_LOGIN_REQUEST |
-//   | USER_LOGIN_SUCCESS
-//   | USER_LOGIN_FAIL
-//   | USER_LOGOUT_REQUEST
-//   | USER_LOGOUT_SUCCESS
-//   | USER_LOGOUT_FAIL;
+
+export type AuthUserActionType = {
+  type: string;
+  payload: InitialStateType;
+};
 
 export default (
   state: InitialStateType = initialState,
-  { type, payload }
+  action: AuthUserActionType
 ): InitialStateType => {
-  switch (type) {
-    // LOGIN ACTIONS
+  switch (action.type) {
     case USER_LOGIN_REQUEST:
       return {
         ...state,
@@ -39,12 +34,13 @@ export default (
       };
 
     case USER_LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.token);
+      action.payload.token !== null &&
+        localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         error: false,
-        token: payload.token,
-        admin: payload.admin
+        token: action.payload.token,
+        admin: action.payload.admin
       };
 
     case USER_LOGIN_FAIL:
@@ -55,25 +51,10 @@ export default (
         isLoading: false
       };
 
-    // LOGOUT ACTIONS
-    case USER_LOGOUT_REQUEST:
-      return {
-        ...state,
-        error: false,
-        isLoading: true
-      };
-
-    case USER_LOGOUT_SUCCESS:
+    case USER_LOGOUT:
       localStorage.removeItem("token");
       return {
         ...initialState
-      };
-
-    case USER_LOGOUT_FAIL:
-      return {
-        ...state,
-        error: true,
-        isLoading: false
       };
 
     default:

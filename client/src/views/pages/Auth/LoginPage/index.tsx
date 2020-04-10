@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import { message } from "antd";
 
@@ -10,15 +11,25 @@ import { WrapForm } from "./styles";
 
 interface CustomProps {}
 
-const LoginPage: React.FC<InjectedFormProps<{}, CustomProps> & CustomProps> = ({
-  handleSubmit
-}) => {
+type ValuesProps = {
+  email: string;
+  password: string;
+};
+
+const LoginPage: React.FC<
+  InjectedFormProps<ValuesProps, CustomProps> & CustomProps
+> = ({ handleSubmit }) => {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const state = useSelector(state => {
+    return state;
+  });
 
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    handleSubmit(values => {
+    handleSubmit((values: ValuesProps) => {
       setLoading(true);
 
       console.log(values);
@@ -32,6 +43,9 @@ const LoginPage: React.FC<InjectedFormProps<{}, CustomProps> & CustomProps> = ({
       //     setLoading(false);
       //     message.error(ERROR_MESSAGE);
       //   });
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     })();
   };
   return (
@@ -41,7 +55,7 @@ const LoginPage: React.FC<InjectedFormProps<{}, CustomProps> & CustomProps> = ({
   );
 };
 
-export default reduxForm<{}, CustomProps>({
+export default reduxForm<ValuesProps, CustomProps>({
   form: "login",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
