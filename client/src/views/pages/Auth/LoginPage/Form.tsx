@@ -1,19 +1,19 @@
-import React from "react";
-import { reduxForm, InjectedFormProps, Field } from "redux-form";
+import React, { FormEvent } from "react";
+import { Field } from "redux-form";
 import { Form as MainForm, Button } from "antd";
 
 import Input from "../../../common/Input";
 
 import { required } from "../../../../helpers/validate";
-import { ValuesProps } from "./index";
+
 type CustomPropsType = {
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   loading: boolean;
 };
 
-const Form: React.FC<InjectedFormProps<ValuesProps, CustomPropsType> &
-  CustomPropsType> = ({ loading, handleSubmit }) => {
+const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <h1>Sing in</h1>
       <Field
         name="email"
@@ -41,6 +41,4 @@ const Form: React.FC<InjectedFormProps<ValuesProps, CustomPropsType> &
   );
 };
 
-export default reduxForm<ValuesProps, CustomPropsType>({
-  form: "auth"
-})(Form);
+export default Form;
