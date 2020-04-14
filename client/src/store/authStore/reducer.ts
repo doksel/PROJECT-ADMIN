@@ -3,7 +3,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT
-} from "./selectors";
+} from "./actions";
 
 const initialState = {
   email: "",
@@ -23,9 +23,9 @@ export type AuthUserActionType = {
 
 export default (
   state: InitialStateType = initialState,
-  action: AuthUserActionType
+  { type, payload }: AuthUserActionType
 ): InitialStateType => {
-  switch (action.type) {
+  switch (type) {
     case USER_LOGIN_REQUEST:
       return {
         ...state,
@@ -34,13 +34,12 @@ export default (
       };
 
     case USER_LOGIN_SUCCESS:
-      action.payload.token !== null &&
-        localStorage.setItem("token", action.payload.token);
+      payload.token !== null && localStorage.setItem("token", payload.token);
       return {
         ...state,
         error: false,
-        token: action.payload.token,
-        admin: action.payload.admin
+        token: payload.token,
+        admin: payload.admin
       };
 
     case USER_LOGIN_FAIL:
@@ -55,6 +54,14 @@ export default (
       localStorage.removeItem("token");
       return {
         ...initialState
+      };
+
+    case "LOGIN":
+      return {
+        ...state,
+        error: false,
+        email: payload.email,
+        password: payload.password
       };
 
     default:

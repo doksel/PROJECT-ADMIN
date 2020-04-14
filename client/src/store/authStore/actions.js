@@ -5,6 +5,8 @@ export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
 export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const userLogin = payload => {
+  console.log(payload);
+  
   return {
     type: "API",
     payload: {

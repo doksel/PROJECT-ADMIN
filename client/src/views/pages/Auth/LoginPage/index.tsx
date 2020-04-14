@@ -1,24 +1,20 @@
 import React, { useState, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { reduxForm, InjectedFormProps } from "redux-form";
 import { message } from "antd";
 
 import Form from "./Form";
 
+import { userLogin } from "../../../../store/authStore/actions";
 import { ERROR_MESSAGE } from "../../../../helpers/values";
 
 import { WrapForm } from "./styles";
 
-interface CustomProps {}
-
-type ValuesProps = {
+export type ValuesProps = {
   email: string;
   password: string;
 };
 
-const LoginPage: React.FC<
-  InjectedFormProps<ValuesProps, CustomProps> & CustomProps
-> = ({ handleSubmit }) => {
+let LoginPage: React.FC = props => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -26,27 +22,14 @@ const LoginPage: React.FC<
     return state;
   });
 
-  const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const formSubmit = (values: ValuesProps) => {
+    setLoading(true);
 
-    handleSubmit((values: ValuesProps) => {
-      setLoading(true);
+    dispatch({ type: "LOGIN", payload: values });
 
-      console.log(values);
+    // dispatch(userLogin(values));
 
-      // return signIn(values)
-      //   .then(() => {
-      //     setLoading(false);
-      //     message.error("Successful enter");
-      //   })
-      //   .catch(() => {
-      //     setLoading(false);
-      //     message.error(ERROR_MESSAGE);
-      //   });
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    })();
+    setLoading(false);
   };
   return (
     <WrapForm>
@@ -55,8 +38,4 @@ const LoginPage: React.FC<
   );
 };
 
-export default reduxForm<ValuesProps, CustomProps>({
-  form: "login",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true
-})(LoginPage);
+export default LoginPage;

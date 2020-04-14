@@ -14,8 +14,8 @@ const Input = ({
   invisible,
   defaultValue
 }) => {
-  const [value,setValue]=useState();
-  
+  const [value, setValue] = useState();
+
   useEffect(() => {
     initialValue && input.onChange(initialValue);
     !input.value && defaultValue && input.onChange(defaultValue);
@@ -27,7 +27,6 @@ const Input = ({
         hasFeedback
         validateStatus={touched ? (error ? "error" : "success") : ""}
         className={`create-form-item ${touched && error ? "has-error" : ""}`}
-        style={{ width: "100%" }}
       >
         {label === "empty" ? (
           <label>&nbsp;</label>
@@ -39,18 +38,23 @@ const Input = ({
             )}
           </label>
         )}
-    <MainInput
-      type={type || "text"}
-      placeholder={placeholder}
-      disabled={disabled}
-      value={value}
-      onChange={e=>setValue(e.target.value)
-      }
-    />
 
+        <MainInput
+          type={type || "text"}
+          placeholder={placeholder}
+          disabled={disabled}
+          {...input}
+          name={input.name}
+          value={value}
+          onChange={e => {
+            setValue(e.target.value);
+            input.onChange(e);
+          }}
+        />
 
         <p className="form-item_error ant-form-explain">{touched && error}</p>
       </Form.Item>
+
     )
   );
 };
