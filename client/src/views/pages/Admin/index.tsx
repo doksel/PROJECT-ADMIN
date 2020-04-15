@@ -1,6 +1,6 @@
 import React from "react";
 
-const Admin = () => (
+const Admin: React.FC = () => (
   <>
     <h1>Admin page</h1>
   </>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Main = () => (
+const Main: React.FC = () => (
   <>
     <h1>Main page</h1>
   </>

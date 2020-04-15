@@ -1,15 +1,21 @@
 import React from "react";
 import { Button as MainButton } from "antd";
+import { ButtonProps } from "antd/lib/button/button";
+import { WrappedFieldInputProps } from "redux-form/lib/Field";
 
-import "../FormComponents.less";
+type CustomButtonTypes = {
+  input?: WrappedFieldInputProps;
+  text?: string;
+};
 
-const Button = ({
+const Button: React.FC<ButtonProps & CustomButtonTypes> = ({
   input,
   disabled,
   icon,
   className,
   size,
   type,
+  htmlType,
   text,
   onClick,
   ghost,
@@ -21,12 +27,13 @@ const Button = ({
     disabled={disabled}
     loading={loading}
     type={type}
+    htmlType={htmlType}
     size={size}
     className={className}
     icon={icon}
     onClick={e => {
-      input.onChange(true);
-      onClick(e);
+      input && input.onChange(true);
+      onClick && onClick(e);
     }}
   >
     {text}
