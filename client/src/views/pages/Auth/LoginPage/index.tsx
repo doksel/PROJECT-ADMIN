@@ -5,19 +5,19 @@ import { message } from "antd";
 
 import Form from "./Form";
 
-import { userLogin } from "../../../../store/authStore/actions";
+import { signIn } from "../../../../store/authStore/actions";
 import { ERROR_MESSAGE } from "../../../../helpers/values";
 
-import { WrapForm } from "./styles";
+import { WrapForm } from "../styles";
 
 interface CustomProps {}
 
-export type ValuesProps = {
+export type ValuesPropsSignIntypes = {
   email: string;
   password: string;
 };
 
-let LoginPage: React.FC<InjectedFormProps<ValuesProps, CustomProps> &
+let LoginPage: React.FC<InjectedFormProps<ValuesPropsSignIntypes, CustomProps> &
   CustomProps> = ({ handleSubmit }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -29,13 +29,13 @@ let LoginPage: React.FC<InjectedFormProps<ValuesProps, CustomProps> &
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    handleSubmit((values: ValuesProps) => {
+    handleSubmit((values: ValuesPropsSignIntypes) => {
       setLoading(true);
 
       dispatch({ type: "LOGIN", payload: values });
     })();
 
-    // dispatch(userLogin(values));
+    // dispatch(signIn(values));
 
     setTimeout(() => {
       setLoading(false);
@@ -49,6 +49,6 @@ let LoginPage: React.FC<InjectedFormProps<ValuesProps, CustomProps> &
   );
 };
 
-export default reduxForm<ValuesProps, CustomProps>({
+export default reduxForm<ValuesPropsSignIntypes, CustomProps>({
   form: "authForm"
 })(LoginPage);
