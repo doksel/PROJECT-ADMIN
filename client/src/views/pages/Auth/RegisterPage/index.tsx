@@ -38,10 +38,9 @@ let RegisterPage: React.FC<InjectedFormProps<
     handleSubmit((values: ValuesPropsSignUptypes) => {
       setLoading(true);
 
-      dispatch({ type: "LOGIN", payload: values });
+      // dispatch({ type: "LOGIN", payload: values });
+      dispatch(signUp(values));
     })();
-
-    // dispatch(signUps(values));
 
     setTimeout(() => {
       setLoading(false);

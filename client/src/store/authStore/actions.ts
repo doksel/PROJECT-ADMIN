@@ -19,7 +19,7 @@ export const signIn = (payload: ValuesPropsSignIntypes) => {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        urlParams: `/login`
+        urlParams: `/auth/login`
       },
       variables: payload,
       actions: [USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL]
@@ -39,7 +39,7 @@ export const signUp = (payload: ValuesPropsSignUptypes) => {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        urlParams: `/register`
+        urlParams: `/auth/register`
       },
       variables: payload,
       actions: [USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL]

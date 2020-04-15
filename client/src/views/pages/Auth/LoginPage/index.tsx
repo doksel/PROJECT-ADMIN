@@ -32,10 +32,9 @@ let LoginPage: React.FC<InjectedFormProps<ValuesPropsSignIntypes, CustomProps> &
     handleSubmit((values: ValuesPropsSignIntypes) => {
       setLoading(true);
 
-      dispatch({ type: "LOGIN", payload: values });
+      // dispatch({ type: "LOGIN", payload: values });
+      dispatch(signIn(values));
     })();
-
-    // dispatch(signIn(values));
 
     setTimeout(() => {
       setLoading(false);

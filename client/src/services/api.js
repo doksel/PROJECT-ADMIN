@@ -1,4 +1,5 @@
-export const API_URL = "http://localhost:4000/v1/api";
+export const host = process.env.REACT_APP_SERVER_HOST;
+export const API_URL = `${host}/v1/api`;
 
 export const client = (variables, query) => {
   const token = localStorage.getItem("token");

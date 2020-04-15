@@ -25,13 +25,13 @@ async (req,res)=>{
     }
 
     const {email, password}=req.body; 
-    const candidate = await User.findOne({email}) 
+    const candidate = await User.findOne({email})     
 
     if(candidate){
       return res.status(400).json({message: "Email is used"})
     }
 
-    const hashedPassword = await bcrypt.hash(password, secretBcrypt);
+    const hashedPassword = await bcrypt.hash(password, 3475);
     const user = new User({email, password: hashedPassword});
 
     await user.save();
