@@ -38,6 +38,7 @@ export default (
       return {
         ...state,
         error: false,
+        isLoading: false,
         token: payload.token,
         admin: payload.admin
       };
