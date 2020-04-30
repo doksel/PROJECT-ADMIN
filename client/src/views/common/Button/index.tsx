@@ -1,17 +1,23 @@
-import React from "react";
-import { Button as MainButton } from "antd";
-import { ButtonProps } from "antd/lib/button/button";
+import React, { MouseEvent } from "react";
+import ButtonUI from "../../ui/Button";
 import { WrappedFieldInputProps } from "redux-form/lib/Field";
 
-type CustomButtonTypes = {
+export type CustomButtonTypes = {
   input?: WrappedFieldInputProps;
+  className?: string;
+  size?: string;
+  type?: string;
+  htmlType: "button" | "submit" | "reset" | "undefined";
   text?: string;
+  onClick?: (e: React.MouseEvent) => void;
+  ghost?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
 };
 
-const Button: React.FC<ButtonProps & CustomButtonTypes> = ({
+const Button: React.FC<CustomButtonTypes> = ({
   input,
   disabled,
-  icon,
   className,
   size,
   type,
@@ -21,23 +27,20 @@ const Button: React.FC<ButtonProps & CustomButtonTypes> = ({
   ghost,
   loading
 }) => (
-  <MainButton
-    style={{ width: "100%" }}
+  <ButtonUI
     ghost={ghost}
     disabled={disabled}
     loading={loading}
     type={type}
     htmlType={htmlType}
     size={size}
+    text={text}
     className={className}
-    icon={icon}
-    onClick={e => {
+    onClick={(e: React.MouseEvent) => {
       input && input.onChange(true);
       onClick && onClick(e);
     }}
-  >
-    {text}
-  </MainButton>
+  />
 );
 
 export default Button;

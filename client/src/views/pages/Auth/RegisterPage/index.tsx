@@ -1,7 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxForm, InjectedFormProps } from "redux-form";
-import { message } from "antd";
 
 import Form from "./Form";
 
@@ -38,7 +37,6 @@ let RegisterPage: React.FC<InjectedFormProps<
     handleSubmit((values: ValuesPropsSignUptypes) => {
       setLoading(true);
 
-      // dispatch({ type: "LOGIN", payload: values });
       dispatch(signUp(values));
     })();
 

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input as MainInput } from "antd";
-import { InputProps } from "antd/lib/input/Input";
+import React, { FormEvent, ChangeEvent } from "react";
 import {
   WrappedFieldInputProps,
   WrappedFieldMetaProps
 } from "redux-form/lib/Field";
+
+import InputUI from "../../ui/Input";
+import { WrapInput } from "./styles";
 
 type CustomInputTypes = {
   input: WrappedFieldInputProps;
@@ -17,59 +18,61 @@ type CustomInputTypes = {
   label: string;
 };
 
-const Input: React.FC<InputProps & CustomInputTypes> = ({
-  input,
-  placeholder,
-  meta: { touched, error },
-  type = "text",
+export type InputTypes = {
+  type?: string;
+  placeholder?: string;
+  initValue?: string;
+  disabled?: boolean;
+  maxLength?: number;
+  mask?: (e: FormEvent<HTMLFormElement>, input: WrappedFieldInputProps) => void;
+};
+
+const Input: React.FC<InputTypes & CustomInputTypes> = ({
   label,
+  input,
+  type = "text",
+  meta: { touched, error },
+  placeholder,
+  initValue,
+  defaultValue,
   disabled,
-  required,
-  initialValue,
-  notification,
   invisible,
-  defaultValue
+  required,
+  maxLength,
+  mask
 }) => {
-  const [value, setValue] = useState<string>();
+  if (initValue && !input.value) {
+    input.onChange(initValue);
+  }
 
-  useEffect(() => {
-    initialValue && input.onChange(initialValue);
-    !input.value && defaultValue && input.onChange(defaultValue);
-  }, [initialValue]);
+  if (defaultValue) {
+    input.onChange(defaultValue);
+  }
 
-  return !invisible ? (
-    <Form.Item
-      hasFeedback
-      validateStatus={touched ? (error ? "error" : "success") : ""}
-      className={`create-form-item ${touched && error ? "has-error" : ""}`}
-    >
+  return (
+    <WrapInput labelTransform="capitalize">
       {label ? (
-        <label className={required ? "required" : undefined}>
-          {label}:{" "}
-          {notification && (
-            <span className="notification">( {notification} )</span>
-          )}
-        </label>
+        <label className={required ? "required" : undefined}>{label}:</label>
       ) : (
         <label>&nbsp;</label>
       )}
 
-      <MainInput
-        type={type}
-        placeholder={placeholder}
-        disabled={disabled}
+      <InputUI
         {...input}
-        name={input.name}
-        value={value}
-        onChange={e => {
-          setValue(e.target.value);
-          input.onChange(e);
-        }}
+        placeholder={placeholder}
+        touched={touched}
+        error={error}
+        type={type}
+        disabled={disabled}
+        maxLength={maxLength}
+        onKeyUp={mask && ((e: FormEvent<HTMLFormElement>) => mask(e, input))}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          input.onChange(e.target.value)
+        }
       />
 
-      <p className="form-item_error ant-form-explain">{touched && error}</p>
-    </Form.Item>
-  ) : null;
+      {touched && error && <span className="error">{error}</span>}
+    </WrapInput>
+  );
 };
-
 export default Input;

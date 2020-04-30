@@ -1,7 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxForm, InjectedFormProps } from "redux-form";
-import { message } from "antd";
 
 import Form from "./Form";
 
@@ -32,7 +31,6 @@ let LoginPage: React.FC<InjectedFormProps<ValuesPropsSignIntypes, CustomProps> &
     handleSubmit((values: ValuesPropsSignIntypes) => {
       setLoading(true);
 
-      // dispatch({ type: "LOGIN", payload: values });
       dispatch(signIn(values));
     })();
 

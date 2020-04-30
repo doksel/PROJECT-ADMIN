@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Layout, message } from "antd";
 import { Route, Switch } from "react-router-dom";
 
 import DefaultRoute from "./default";
@@ -17,19 +16,17 @@ const App = () => {
       <>
         {!loading && (
           <>
-            <Layout >
-              <Switch>
-                <Route path="/" exact component={DefaultRoute} /> <GuestRoute path="/login" exact component={Auth} />
-                
-                <GuestRoute path="/auth/:type" exact component={Auth} />
-                
-                <PrivateRoute
-                  path="/admin/:category?/:action?/:id?"
-                  exact
-                  component={Admin}
-                />
-              </Switch>
-            </Layout>
+            <Switch>
+              <Route path="/" exact component={DefaultRoute} /> <GuestRoute path="/login" exact component={Auth} />
+              
+              <GuestRoute path="/auth/:type" exact component={Auth} />
+              
+              <PrivateRoute
+                path="/admin/:category?/:action?/:id?"
+                exact
+                component={Admin}
+              />
+            </Switch>
           </>
         )}
       </>

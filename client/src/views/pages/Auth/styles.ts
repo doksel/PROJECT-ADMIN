@@ -9,7 +9,7 @@ export const WrapForm = styled.div`
   background-color: #cececece;
   position: fixed;
 
-  form{
+  form {
     width: 100%;
     max-width: 450px;
     display: flex;
@@ -21,21 +21,8 @@ export const WrapForm = styled.div`
     border-radius: 6px;
     box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
 
-    h1{ 
+    h1 {
       text-align: center;
     }
-  }
-`;
- 
-export const WrapButton = styled.div`
-  margin-top: 60px;
-`;
-
-export const WrapInput = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  img {
-    width: 22px;
   }
 `;

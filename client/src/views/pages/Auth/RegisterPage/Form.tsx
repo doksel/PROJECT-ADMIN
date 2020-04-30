@@ -1,7 +1,6 @@
 import React, { FormEvent } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Field } from "redux-form";
-import { Form as MainForm } from "antd";
 
 import Button from "../../../common/Button";
 import Input from "../../../common/Input";
