@@ -7,7 +7,7 @@ import {
   useExpanded,
   usePagination
 } from "react-table";
-import Loader from "../../../views/components/Loader/Loader";
+import Loader from "../../components/Loader";
 
 import cm from "classnames";
 import s from "./Table.module.less";

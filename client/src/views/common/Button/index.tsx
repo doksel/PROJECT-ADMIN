@@ -7,7 +7,7 @@ export type CustomButtonTypes = {
   className?: string;
   size?: string;
   type?: string;
-  htmlType: "button" | "submit" | "reset" | "undefined";
+  htmlType: "button" | "submit" | "reset" | undefined;
   text?: string;
   onClick?: (e: React.MouseEvent) => void;
   ghost?: boolean;

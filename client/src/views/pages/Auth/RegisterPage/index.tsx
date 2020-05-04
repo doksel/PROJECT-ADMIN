@@ -11,7 +11,7 @@ import { WrapForm } from "../styles";
 
 interface CustomProps {}
 
-export type ValuesPropsSignUptypes = {
+export type ValuesPropsSignUpTypes = {
   firstName: string;
   lastName: string;
   email: string;
@@ -20,7 +20,7 @@ export type ValuesPropsSignUptypes = {
 };
 
 let RegisterPage: React.FC<InjectedFormProps<
-  ValuesPropsSignUptypes,
+  ValuesPropsSignUpTypes,
   CustomProps
 > &
   CustomProps> = ({ handleSubmit }) => {
@@ -34,7 +34,7 @@ let RegisterPage: React.FC<InjectedFormProps<
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    handleSubmit((values: ValuesPropsSignUptypes) => {
+    handleSubmit((values: ValuesPropsSignUpTypes) => {
       setLoading(true);
 
       dispatch(signUp(values));
@@ -52,6 +52,6 @@ let RegisterPage: React.FC<InjectedFormProps<
   );
 };
 
-export default reduxForm<ValuesPropsSignUptypes, CustomProps>({
+export default reduxForm<ValuesPropsSignUpTypes, CustomProps>({
   form: "RegisterForm"
 })(RegisterPage);

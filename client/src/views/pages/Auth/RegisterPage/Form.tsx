@@ -5,7 +5,12 @@ import { Field } from "redux-form";
 import Button from "../../../common/Button";
 import Input from "../../../common/Input";
 
-import { required, checkPasswords } from "../../../../helpers/validate";
+import {
+  required,
+  email,
+  hardpassword,
+  checkPasswords
+} from "../../../../helpers/validate";
 
 type CustomPropsType = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -38,7 +43,7 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         component={Input}
         label="email"
         placeholder=""
-        validate={[required]}
+        validate={[email, required]}
       />
 
       <Field
@@ -47,7 +52,7 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         component={Input}
         label="password"
         placeholder=""
-        validate={[required]}
+        validate={[hardpassword, required]}
       />
 
       <Field

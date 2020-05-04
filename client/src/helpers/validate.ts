@@ -6,6 +6,15 @@ export const required = (value: string) =>
     ? undefined
     : "Обов'язково для заповнення";
 
+export const hardpassword = (value: string) =>
+  value &&
+  value.length >= 6 &&
+  value.match(
+    /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
+  )
+    ? undefined
+    : "Пароль має складатися не менше ніж з 6 символів та повинен містити великі та маленькі латинські літери, цифри та спеціальні символи.";
+
 export const checkPasswords = (value: string, form: any) =>
   form.password !== form.re_password
     ? "Пароль повинен бути однаковий"
@@ -83,21 +92,7 @@ export const minLength = (min: number) => (value: string) =>
     ? undefined
     : `Повинно бути ${min} символів чи більше`;
 
-export const maxLength60 = maxLength(60);
-
-export const maxLength7 = maxLength(7);
-
-export const maxLength70 = maxLength(70);
-
-export const maxLength50 = maxLength(50);
-
-export const maxLength10 = maxLength(10);
-
-export const maxLength255 = maxLength(255);
-
-export const maxLength120 = maxLength(120);
-
-export const maxLength1000 = maxLength(1000);
+export const maxLength60 = maxLength(10);
 
 export const number = (value: string) =>
   value && isNaN(Number(value)) ? "Повинно бути числом" : undefined;

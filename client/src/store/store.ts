@@ -7,6 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import reducers from "./reducers";
 import { reducer as formReducer } from "redux-form";
 import saga from "./saga";
+
 const createHistory = require("history").createBrowserHistory;
 
 export const history = createHistory();
@@ -18,7 +19,10 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2
 };
 
-const persistedReducer = persistCombineReducers(persistConfig, {...reducers, form: formReducer});
+const persistedReducer = persistCombineReducers(persistConfig, {
+  ...reducers,
+  form: formReducer
+});
 const sagaMiddleware = createSagaMiddleware(history);
 
 export const store = createStore(

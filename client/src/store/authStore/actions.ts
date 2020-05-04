@@ -1,5 +1,5 @@
-import { ValuesPropsSignIntypes } from "../../views/pages/Auth/LoginPage";
-import { ValuesPropsSignUptypes } from "../../views/pages/Auth/RegisterPage";
+import { ValuesPropsSignInTypes } from "../../views/pages/Auth/LoginPage";
+import { ValuesPropsSignUpTypes } from "../../views/pages/Auth/RegisterPage";
 
 export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
@@ -7,7 +7,7 @@ export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
 
 export const USER_LOGOUT = "USER_LOGOUT";
 
-export const signIn = (payload: ValuesPropsSignIntypes) => {
+export const signIn = (payload: ValuesPropsSignInTypes) => {
   console.log(payload);
 
   return {
@@ -27,7 +27,7 @@ export const signIn = (payload: ValuesPropsSignIntypes) => {
   };
 };
 
-export const signUp = (payload: ValuesPropsSignUptypes) => {
+export const signUp = (payload: ValuesPropsSignUpTypes) => {
   console.log(payload);
 
   return {

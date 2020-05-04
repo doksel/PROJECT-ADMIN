@@ -14,13 +14,13 @@ export const theme = {
   colors: {
     main: "darkslategray",
     secondary: "black",
-    primary: "mediumblue",
+    primary: "royalblue",
     success: "limegreen",
     error: "crimson",
     disabled: "darkgrey",
     main_hover: "lightslategray",
     secondary_hover: "darkgray",
-    primary_hover: "royalblue",
+    primary_hover: "cornflowerblue",
     success_hover: "lightgreen",
     error_hover: "crlightcoralimson"
   },
