@@ -1,5 +1,5 @@
 import React, { FormEvent } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Field } from "redux-form";
 
 import Button from "../../../common/Button";
@@ -15,9 +15,16 @@ import {
 type CustomPropsType = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   loading: boolean;
+  message: string;
+  errors: string;
 };
 
-const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
+const Form: React.FC<{} & CustomPropsType> = ({
+  loading,
+  onSubmit,
+  message,
+  errors
+}) => {
   return (
     <form onSubmit={onSubmit} autoComplete="off">
       <h1>Registration</h1>
@@ -43,7 +50,7 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         component={Input}
         label="email"
         placeholder=""
-        validate={[email, required]}
+        validate={[required, email]}
       />
 
       <Field
@@ -52,7 +59,7 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         component={Input}
         label="password"
         placeholder=""
-        validate={[hardpassword, required]}
+        validate={[required, hardpassword]}
       />
 
       <Field
@@ -63,6 +70,8 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         placeholder=""
         validate={[required, checkPasswords]}
       />
+
+      {message && <div className={errors ? "error" : "success"}>{message}</div>}
 
       <Button htmlType="submit" type="primary" loading={loading} text="Enter" />
 

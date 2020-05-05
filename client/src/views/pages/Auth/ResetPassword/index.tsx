@@ -4,27 +4,26 @@ import { reduxForm, InjectedFormProps } from "redux-form";
 
 import Form from "./Form";
 
-import { signUp } from "../../../../store/authStore/actions";
+import { resetPassword } from "../../../../store/authStore/actions";
 import { AppDispatchType } from "../../../../store/store";
 
 import { WrapForm } from "../styles";
 
-interface CustomProps {}
+interface CustomPropsType {}
 
-export type ValuesSignUpTypes = {
-  firstName: string;
-  lastName: string;
+export type ValuesResetPasswordType = {
   email: string;
-  password: string;
-  re_password: string;
 };
 
 type RootState = {
   authStore: any;
 };
 
-let RegisterPage: React.FC<InjectedFormProps<ValuesSignUpTypes, CustomProps> &
-  CustomProps> = ({ handleSubmit }) => {
+let RessetPassword: React.FC<InjectedFormProps<
+  ValuesResetPasswordType,
+  CustomPropsType
+> &
+  CustomPropsType> = ({ handleSubmit }) => {
   const dispatch: AppDispatchType = useDispatch();
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -35,8 +34,8 @@ let RegisterPage: React.FC<InjectedFormProps<ValuesSignUpTypes, CustomProps> &
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    handleSubmit((values: ValuesSignUpTypes) => {
-      dispatch(signUp(values));
+    handleSubmit((values: ValuesResetPasswordType) => {
+      dispatch(resetPassword(values));
     })();
   };
 
@@ -52,6 +51,6 @@ let RegisterPage: React.FC<InjectedFormProps<ValuesSignUpTypes, CustomProps> &
   );
 };
 
-export default reduxForm<ValuesSignUpTypes, CustomProps>({
-  form: "RegisterForm"
-})(RegisterPage);
+export default reduxForm<ValuesResetPasswordType, CustomPropsType>({
+  form: "authForm"
+})(RessetPassword);

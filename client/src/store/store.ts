@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { persistStore, persistCombineReducers } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -26,9 +26,13 @@ const persistedReducer = persistCombineReducers(persistConfig, {
 const sagaMiddleware = createSagaMiddleware(history);
 
 export const store = createStore(
-  persistedReducer,
+  // persistedReducer,
+  combineReducers({ ...reducers, form: formReducer }),
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
+
+export type AppDispatchType = typeof store.dispatch;
+
 export const persistor = persistStore(store);
 
 sagaMiddleware.run(saga);
