@@ -1,7 +1,10 @@
 import {
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAIL,
+  SIGN_IN_REQUEST,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAIL,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAIL,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
@@ -20,6 +23,7 @@ const initialState = {
   email: "",
   password: "",
   reseted: false,
+  registered: false,
   token: null as string | null,
   admin: false,
   isLoading: false,
@@ -40,7 +44,7 @@ export default (
   { type, payload }: AuthUserActionType
 ): InitialStateType => {
   switch (type) {
-    case USER_LOGIN_REQUEST:
+    case SIGN_IN_REQUEST:
       return {
         ...state,
         error: false,
@@ -48,7 +52,7 @@ export default (
         isLoading: true
       };
 
-    case USER_LOGIN_SUCCESS:
+    case SIGN_IN_SUCCESS:
       payload.token !== null && localStorage.setItem("token", payload.token);
       return {
         ...state,
@@ -57,9 +61,35 @@ export default (
         admin: payload.admin
       };
 
-    case USER_LOGIN_FAIL:
+    case SIGN_IN_FAIL:
       localStorage.removeItem("token");
 
+      return {
+        ...state,
+        error: true,
+        errors: payload.errors,
+        message: payload.message,
+        isLoading: false
+      };
+
+    case SIGN_UP_REQUEST:
+      return {
+        ...state,
+        error: false,
+        errors: null,
+        registered: false,
+        isLoading: true
+      };
+
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        registered: true,
+        admin: payload.admin
+      };
+
+    case SIGN_UP_FAIL:
       return {
         ...state,
         error: true,

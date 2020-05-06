@@ -3,9 +3,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {check, validationResult} from "express-validator";
 
-import {secretJwt, secretBcrypt} from "../config";
+import {secretJwt} from "../config";
 import User from "../models/User";
-import {sendMail, mailer} from "../common/mailer"
+import {sendMail} from "../common/mailer"
 
 const router = Router();
 
@@ -25,23 +25,23 @@ async (req,res)=>{
       })
     }
 
-    const {email, password}=req.body; 
+    const {email, password, firstName, lastName}=req.body; 
     const candidate = await User.findOne({email})     
-
+        
     if(candidate){
       return res.status(400).json({message: "Email is used"})
     }
 
-    const hashedPassword = await bcrypt.hash(password, 3475);
-    const user = new User({email, password: hashedPassword});
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = new User({firstName, lastName, email, password: hashedPassword});
 
     await user.save();
 
     const dataEmail = {
       email,
-      subject: "Congratulations! You have registered on our site!", 
+      subject: 'Congratulations! You have registered on our "Site"!', 
       template: `Your email: ${user.email}
-                 Your password: ${user.password}`
+      Your password: ${password}`
     }
 
     sendMail(dataEmail);
@@ -49,7 +49,7 @@ async (req,res)=>{
     res.status(201).json({message: "User was created"})
 
   }catch (err) {
-    res.status(500).json({message:"Error 500"})
+    res.status(500).json({message:"Error 500", errors: err})
   }
 })
 
@@ -90,7 +90,7 @@ async (req,res)=>{
 
     res.json({token, userId: user.id})
   }catch (err) {
-    res.status(500).json({message:"Error 500"})
+    res.status(500).json({message:"Error 500", errors: err})
   }
 })
 
@@ -116,7 +116,7 @@ router.post('/reset-password', async (req,res)=>{
 
     res.json({reseted: true});
   }catch(err){
-    console.log("reset-password error",err);
+    res.status(500).json({message:"Error 500", errors: err})
   }
   
 })

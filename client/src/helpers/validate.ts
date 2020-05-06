@@ -4,7 +4,7 @@ export const required = (value: string) =>
   (value && typeof value === "string" && !value.match(/^\s+$/)) ||
   (value && typeof value !== "string")
     ? undefined
-    : "Обов'язково для заповнення";
+    : "Required";
 
 export const hardpassword = (value: string) =>
   value &&
@@ -13,23 +13,21 @@ export const hardpassword = (value: string) =>
     /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
   )
     ? undefined
-    : "Пароль має складатися не менше ніж з 6 символів та повинен містити великі та маленькі латинські літери, цифри та спеціальні символи.";
+    : "Password must be stored no less than 6 characters and it is guilty of greatness and small Latin characters, numbers and special characters.";
 
 export const checkPasswords = (value: string, form: any) =>
   form.password !== form.re_password
-    ? "Пароль повинен бути однаковий"
+    ? "The password must be the same"
     : undefined;
 
 export const required_RadioButton = (value: string) =>
-  typeof value === "boolean" ? undefined : "Обов'язково для заповнення";
+  typeof value === "boolean" ? undefined : "Required";
 
 export const required_Series_Of_Doc = (value: string) =>
-  value || typeof value === "number"
-    ? undefined
-    : "Серія обов'язково для заповнення";
+  value || typeof value === "number" ? undefined : "The series is required";
 
 export const required_files = (value: string) =>
-  value && value.length > 0 ? undefined : "Обов'язково для заповнення";
+  value && value.length > 0 ? undefined : "Required";
 
 export const letter_Series_Of_Doc = (value: string) =>
   value && !value.match(/^[A-Za-zА-Яа-яЁё]+$/)
@@ -39,9 +37,7 @@ export const letter_Series_Of_Doc = (value: string) =>
     : undefined;
 
 export const required_Number_Of_Doc = (value: string) =>
-  value || typeof value === "number"
-    ? undefined
-    : "Номер обов'язково для заповнення";
+  value || typeof value === "number" ? undefined : "The number is required";
 
 export const required_UNZR = (value: string) =>
   value === "" ||

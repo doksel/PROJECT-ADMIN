@@ -2,9 +2,13 @@ import { ValuesSignInTypes } from "../../views/pages/Auth/LoginPage";
 import { ValuesSignUpTypes } from "../../views/pages/Auth/RegisterPage";
 import { ValuesResetPasswordType } from "../../views/pages/Auth/ResetPassword";
 
-export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST";
-export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
-export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
+export const SIGN_IN_REQUEST = "SIGN_IN_REQUEST";
+export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
+export const SIGN_IN_FAIL = "SIGN_IN_FAIL";
+
+export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const SIGN_UP_FAIL = "SIGN_UP_FAIL";
 
 export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
@@ -25,7 +29,7 @@ export const signIn = (payload: ValuesSignInTypes) => ({
       urlParams: `/auth/login`
     },
     variables: payload,
-    actions: [USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL]
+    actions: [SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_FAIL]
   }
 });
 
@@ -41,7 +45,7 @@ export const signUp = (payload: ValuesSignUpTypes) => ({
       urlParams: `/auth/register`
     },
     variables: payload,
-    actions: [USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL]
+    actions: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL]
   }
 });
 
