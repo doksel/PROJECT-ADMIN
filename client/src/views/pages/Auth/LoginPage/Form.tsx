@@ -11,14 +11,14 @@ type CustomPropsType = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   loading: boolean;
   message: string;
-  errors: string;
+  error: boolean;
 };
 
 const Form: React.FC<{} & CustomPropsType> = ({
   loading,
   onSubmit,
   message,
-  errors
+  error
 }) => {
   return (
     <form onSubmit={onSubmit} autoComplete="off">
@@ -43,7 +43,7 @@ const Form: React.FC<{} & CustomPropsType> = ({
         icon="far fa-user"
       />
 
-      {message && <div className={errors ? "error" : "success"}>{message}</div>}
+      {message && <div className={error ? "error" : "success"}>{message}</div>}
 
       <Button htmlType="submit" type="primary" loading={loading} text="Enter" />
 

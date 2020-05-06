@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { reduxForm, InjectedFormProps } from "redux-form";
 
@@ -29,7 +29,7 @@ let RessetPassword: React.FC<InjectedFormProps<
 
   const isLoading = useTypedSelector(state => state.authStore.isLoading);
   const message = useTypedSelector(state => state.authStore.message);
-  const errors = useTypedSelector(state => state.authStore.errors);
+  const error = useTypedSelector(state => state.authStore.error);
 
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -39,13 +39,17 @@ let RessetPassword: React.FC<InjectedFormProps<
     })();
   };
 
+  useEffect(() => {
+    dispatch({ type: "RESET_FORM" });
+  }, []);
+
   return (
     <WrapForm>
       <Form
         onSubmit={formSubmit}
         loading={isLoading}
         message={message}
-        errors={errors}
+        error={error}
       />
     </WrapForm>
   );

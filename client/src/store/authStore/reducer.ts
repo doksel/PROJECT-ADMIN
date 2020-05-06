@@ -5,6 +5,7 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
+  RESET_FORM,
   USER_LOGOUT
 } from "./actions";
 
@@ -22,6 +23,7 @@ const initialState = {
   token: null as string | null,
   admin: false,
   isLoading: false,
+  error: false,
   errors: null as ErrorsType | null,
   message: ""
 };
@@ -41,6 +43,7 @@ export default (
     case USER_LOGIN_REQUEST:
       return {
         ...state,
+        error: false,
         errors: null,
         isLoading: true
       };
@@ -49,7 +52,6 @@ export default (
       payload.token !== null && localStorage.setItem("token", payload.token);
       return {
         ...state,
-        errors: null,
         isLoading: false,
         token: payload.token,
         admin: payload.admin
@@ -57,10 +59,10 @@ export default (
 
     case USER_LOGIN_FAIL:
       localStorage.removeItem("token");
-      console.log(payload);
 
       return {
         ...state,
+        error: true,
         errors: payload.errors,
         message: payload.message,
         isLoading: false
@@ -75,6 +77,7 @@ export default (
     case RESET_PASSWORD_REQUEST:
       return {
         ...state,
+        error: false,
         errors: null,
         reseted: false,
         isLoading: true
@@ -90,9 +93,19 @@ export default (
     case RESET_PASSWORD_FAIL:
       return {
         ...state,
-        isLoading: false,
+        error: true,
         errors: payload.errors,
-        message: payload.message
+        message: payload.message,
+        isLoading: false
+      };
+
+    case RESET_FORM:
+      return {
+        ...state,
+        error: false,
+        errors: null,
+        message: "",
+        isLoading: false
       };
 
     case "LOGIN":

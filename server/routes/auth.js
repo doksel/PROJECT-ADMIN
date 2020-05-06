@@ -5,6 +5,7 @@ import {check, validationResult} from "express-validator";
 
 import {secretJwt, secretBcrypt} from "../config";
 import User from "../models/User";
+import {sendMail, mailer} from "../common/mailer"
 
 const router = Router();
 
@@ -35,6 +36,16 @@ async (req,res)=>{
     const user = new User({email, password: hashedPassword});
 
     await user.save();
+
+    const dataEmail = {
+      email,
+      subject: "Congratulations! You have registered on our site!", 
+      template: `Your email: ${user.email}
+                 Your password: ${user.password}`
+    }
+
+    sendMail(dataEmail);
+    
     res.status(201).json({message: "User was created"})
 
   }catch (err) {
@@ -81,6 +92,33 @@ async (req,res)=>{
   }catch (err) {
     res.status(500).json({message:"Error 500"})
   }
+})
+
+router.post('/reset-password', async (req,res)=>{
+  try{
+    if(!req.body.email){
+      return res.status(400).json({message: "User not found"})
+    }
+    const {email}=req.body; 
+    const user = await User.findOne({email});
+
+    if(!user){
+      return res.status(400).json({message: "Email is not found"})
+    }
+
+    const dataEmail = {
+      email,
+      subject: "Reset Password!", 
+      template: `Your password: ${user.password}`
+    }
+
+    sendMail(dataEmail);
+
+    res.json({reseted: true});
+  }catch(err){
+    console.log("reset-password error",err);
+  }
+  
 })
 
 router.post('login', async (req,res)=>{})
