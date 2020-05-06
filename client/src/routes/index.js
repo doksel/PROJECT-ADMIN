@@ -17,7 +17,7 @@ const App = () => {
         {!loading && (
           <>
             <Switch>
-              <Route path="/" exact component={DefaultRoute} /> <GuestRoute path="/login" exact component={Auth} />
+              <Route path="/" exact component={DefaultRoute} /> 
               
               <GuestRoute path="/auth/:type" exact component={Auth} />
               

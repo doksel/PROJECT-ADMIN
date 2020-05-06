@@ -36,15 +36,27 @@ async (req,res)=>{
     const user = new User({firstName, lastName, email, password: hashedPassword});
 
     await user.save();
-
+    
     const dataEmail = {
       email,
       subject: 'Congratulations! You have registered on our "Site"!', 
       template: `Your email: ${user.email}
       Your password: ${password}`
     }
-
+    
     sendMail(dataEmail);
+
+    const dataAdminEmail = {
+      email,
+      subject: 'Congratulations! Another user registered on our "Site"!', 
+      template: `
+      name: ${user.firstName}
+      lastName: ${user.lastName}
+      email: ${user.email}
+      password: ${password}`
+    }
+
+    sendMail(dataAdminEmail);
     
     res.status(201).json({message: "User was created"})
 
@@ -77,7 +89,7 @@ async (req,res)=>{
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-
+    
     if(!isMatch){
       return res.status(400).json({message: "Enter correct password"})
     }
@@ -88,7 +100,14 @@ async (req,res)=>{
       {expiresIn:"1h"}
     )
 
-    res.json({token, userId: user.id})
+    const reqUser = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      fotos: user.fotos
+    }
+
+    res.json({token, user:reqUser})
   }catch (err) {
     res.status(500).json({message:"Error 500", errors: err})
   }
