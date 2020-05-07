@@ -13,7 +13,7 @@ type BreadcrumbType = {
   history: any;
 };
 
-const Breadcrumb: React.FC<RouteComponentProps & BreadcrumbType> = ({
+const Breadcrumbs: React.FC<RouteComponentProps & BreadcrumbType> = ({
   crumbs,
   history
 }) => (
@@ -40,4 +40,4 @@ const Breadcrumb: React.FC<RouteComponentProps & BreadcrumbType> = ({
   </WrapBreadcrumb>
 );
 
-export default withRouter(Breadcrumb);
+export default withRouter(Breadcrumbs);

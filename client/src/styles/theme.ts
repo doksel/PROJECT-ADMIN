@@ -22,7 +22,8 @@ export const theme = {
     secondary_hover: "darkgray",
     primary_hover: "cornflowerblue",
     success_hover: "lightgreen",
-    error_hover: "crlightcoralimson"
+    error_hover: "crlightcoralimson",
+    link_hover: "#234161"
   },
 
   breakPoints: {

@@ -15,7 +15,7 @@ const App = () => {
   return (
       <>
         {!loading && (
-          <>
+          <div className="main">
             <Switch>
               <Route path="/" exact component={DefaultRoute} /> 
               
@@ -27,7 +27,7 @@ const App = () => {
                 component={Admin}
               />
             </Switch>
-          </>
+          </div>
         )}
       </>
     )

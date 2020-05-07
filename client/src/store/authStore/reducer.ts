@@ -19,15 +19,8 @@ type ErrorsType = {
   location: string;
 };
 
-type UserType = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  fotos: [];
-};
-
 const initialState = {
-  user: null as UserType | null,
+  userId: null as string | null,
   reseted: false,
   registered: false,
   token: null as string | null,
@@ -64,7 +57,7 @@ export default (
         ...state,
         isLoading: false,
         token: payload.token,
-        user: payload.user,
+        userId: payload.userId,
         admin: payload.admin
       };
 

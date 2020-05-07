@@ -100,14 +100,7 @@ async (req,res)=>{
       {expiresIn:"1h"}
     )
 
-    const reqUser = {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      fotos: user.fotos
-    }
-
-    res.json({token, user:reqUser})
+    res.json({token, userId: user.id})
   }catch (err) {
     res.status(500).json({message:"Error 500", errors: err})
   }

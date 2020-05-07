@@ -5,15 +5,16 @@ type ButtonProps = {
 };
 
 export const WrapBreadcrumb = styled.div<ButtonProps>`
-  margin-bottom: 20px;
+  padding: 10px 20px;
   color: ${props => props.theme.colors.disabled};
+  border-bottom: 1px solid ${props => props.theme.colors.disabled};
 
   span {
     margin: 0 10px;
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.main};
     text-decoration: none;
 
     span {
