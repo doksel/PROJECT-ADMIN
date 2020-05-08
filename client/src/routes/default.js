@@ -4,10 +4,8 @@ import { Redirect } from "react-router-dom";
 
 const DefaultRoute = ({ user }) => {
   let path;
-
-  const token = localStorage.getItem("token")
-
-  if (token) {
+  
+  if (user) {
     path = "admin";
   } else {
     path = "auth/login";
@@ -16,8 +14,6 @@ const DefaultRoute = ({ user }) => {
   return <Redirect to={path} />;
 };
 
-const mapStateToProps = ({authStore}) => ({
-  user: authStore.user
-});
+const mapStateToProps = ({userStore}) => ({...userStore});
 
 export default connect(mapStateToProps)(DefaultRoute);

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-type ButtonProps = {
+type ButtonPropsType = {
   type?: string;
 };
 
-export const WrapBreadcrumb = styled.div<ButtonProps>`
+export const WrapBreadcrumb = styled.div<ButtonPropsType>`
   padding: 10px 20px;
   color: ${props => props.theme.colors.disabled};
   border-bottom: 1px solid ${props => props.theme.colors.disabled};

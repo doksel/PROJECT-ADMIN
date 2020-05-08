@@ -3,13 +3,11 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 const GuestRoute = ({ component: Component, user, ...rest }) => {
-  const token = localStorage.getItem("token");
-
   return(
   <Route
     {...rest}
     render={props => {
-      if (!token) {
+      if (!user) {
         return <Component {...props} />;
       }
 
@@ -18,8 +16,6 @@ const GuestRoute = ({ component: Component, user, ...rest }) => {
   />
 )};
 
-const mapStateToProps = ({authStore}) => ({
-  user: authStore.user
-});
+const mapStateToProps = ({userStore}) => ({...userStore});
 
 export default connect(mapStateToProps)(GuestRoute);

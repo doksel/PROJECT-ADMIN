@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import DefaultRoute from "./default";
 import GuestRoute from "./hoc/GuestRoute.js";
 import PrivateRoute from "./hoc/PrivateRoute.js";
-
+import MainLoader from "../views/components/MainLoader"
 
 import Auth from "../views/pages/Auth";
 import Admin from "../views/pages/Admin";
+import { me } from "../store/userStore/actions";
 
-const App = () => {
-  const [ loading, setLoading ] = useState(false);
+const token = localStorage.getItem("token")
 
+const App = ({user, isLoading}) => {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    token && dispatch(me());
+  },[])
+
+  useEffect(()=>{
+    dispatch(me());
+  },[user && user.firstName])
+  
   return (
       <>
-        {!loading && (
+        {isLoading ? (
+          <MainLoader/>
+        ) :
+         (
           <div className="main">
             <Switch>
               <Route path="/" exact component={DefaultRoute} /> 
@@ -33,4 +49,6 @@ const App = () => {
     )
   }
 
-export default App;
+  const mapStateToProps = ({userStore}) => ({...userStore});
+
+  export default connect(mapStateToProps)(App);

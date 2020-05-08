@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-type LoaderType = {
-  type?: string;
+type LoaderPropsType = {
+  color?: string;
 };
 
-export const WrapLoader = styled.div<LoaderType>`
+export const WrapLoader = styled.div<LoaderPropsType>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -24,10 +24,11 @@ export const WrapLoader = styled.div<LoaderType>`
     position: absolute;
     width: 15px;
     height: 15px;
-    border: 2px solid #fff;
+    border: 2px solid ${props => (props.color ? props.color : "#fff")};
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: ${props => (props.color ? props.color : "#fff")} transparent
+      transparent transparent;
   }
   .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
