@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const WrapHeader = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: ${props => props.theme.borders.main};
   padding: 20px;
   height: 100px;
+  color: #fff;
   background: ${props => props.theme.colors.primary};
   box-shadow: 2px 2px 8px 1px ${props => props.theme.colors.disabled};
 
@@ -23,4 +25,10 @@ export const WrapHeader = styled.div`
     font-size: 18px;
     margin-bottom: 1px;
   }
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;

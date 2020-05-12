@@ -12,18 +12,14 @@ import Auth from "../views/pages/Auth";
 import Admin from "../views/pages/Admin";
 import { me } from "../store/userStore/actions";
 
-const token = localStorage.getItem("token")
 
-const App = ({user, isLoading}) => {
+const App = ({token, isLoading}) => {
   const dispatch = useDispatch();
+  const tokens = token || localStorage.getItem("token")
 
   useEffect(()=>{
-    token && dispatch(me());
-  },[])
-
-  useEffect(()=>{
-    dispatch(me());
-  },[user && user.firstName])
+    tokens && dispatch(me());
+  },[tokens])
   
   return (
       <>
@@ -49,6 +45,6 @@ const App = ({user, isLoading}) => {
     )
   }
 
-  const mapStateToProps = ({userStore}) => ({...userStore});
+  const mapStateToProps = ({authStore}) => ({...authStore});
 
   export default connect(mapStateToProps)(App);

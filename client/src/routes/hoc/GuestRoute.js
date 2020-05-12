@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const GuestRoute = ({ component: Component, user, ...rest }) => {
-  return(
+const GuestRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
     render={props => {
@@ -14,7 +13,7 @@ const GuestRoute = ({ component: Component, user, ...rest }) => {
       return <Redirect to="/" />;
     }}
   />
-)};
+);
 
 const mapStateToProps = ({userStore}) => ({...userStore});
 

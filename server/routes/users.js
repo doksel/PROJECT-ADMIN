@@ -12,7 +12,7 @@ async (req,res)=>{
     const users = await User.find({})
     res.json({users})
   }catch (err) {
-    res.status(500).json({message:"Error 500", errors: detoken})
+    res.status(500).json({message:"Error 500", errors: err})
   }
 })
 
@@ -35,7 +35,7 @@ async (req,res)=>{
     res.json({user})
 
   }catch (err) {
-    res.status(500).json({message:"Error 500", errors: detoken})
+    res.status(500).json({message:"Error 500", errors: err})
   }
 })
 

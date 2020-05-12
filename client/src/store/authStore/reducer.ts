@@ -8,8 +8,7 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
-  RESET_FORM,
-  USER_LOGOUT
+  RESET_FORM
 } from "./actions";
 
 type ErrorsType = {
@@ -96,12 +95,6 @@ export default (
         errors: payload.errors,
         message: payload.message,
         isLoading: false
-      };
-
-    case USER_LOGOUT:
-      localStorage.removeItem("token");
-      return {
-        ...initialState
       };
 
     case RESET_PASSWORD_REQUEST:

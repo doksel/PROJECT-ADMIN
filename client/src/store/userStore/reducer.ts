@@ -1,4 +1,9 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAIL } from "./actions";
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAIL,
+  USER_LOGOUT
+} from "./actions";
 
 type ErrorsType = {
   value: string;
@@ -58,6 +63,11 @@ export default (
         isLoading: false
       };
 
+    case USER_LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

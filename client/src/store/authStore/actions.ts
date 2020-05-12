@@ -15,7 +15,6 @@ export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL";
 
 export const RESET_FORM = "RESET_FORM";
-export const USER_LOGOUT = "USER_LOGOUT";
 
 export const signIn = (payload: ValuesSignInTypes) => ({
   type: "API",
