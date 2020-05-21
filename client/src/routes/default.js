@@ -14,8 +14,6 @@ const DefaultRoute = ({ user }) => {
   return <Redirect to={path} />;
 };
 
-const mapStateToProps = ({ user }) => ({
-  user
-});
+const mapStateToProps = ({ authStore }) => ({ ...authStore });
 
 export default connect(mapStateToProps)(DefaultRoute);

@@ -7,7 +7,7 @@ dotenv.config({ path: root('.env') });
 export const isProduction = process.env.NODE_ENV === 'production';
 export const isDevelopment = !isProduction;
 
-export const secretBcrypt = process.env.SECRET_BCRYPT || "doksel";
+export const secretBcrypt = process.env.SECRET_BCRYPT || 134;
 export const secretJwt = process.env.SECRET_JWT || "doksel secret";
 
 export const url = process.env.URL;

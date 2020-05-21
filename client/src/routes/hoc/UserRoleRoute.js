@@ -21,8 +21,8 @@ const UserRoleRoute = ({
   />
 );
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = ({authStore}) => ({
+  user: authStore.user
 });
 
 export default connect(mapStateToProps)(UserRoleRoute);

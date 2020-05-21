@@ -1,7 +1,8 @@
 import React, { FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { Field } from "redux-form";
-import { Form as MainForm, Button } from "antd";
 
+import Button from "../../../common/Button";
 import Input from "../../../common/Input";
 
 import { required } from "../../../../helpers/validate";
@@ -9,12 +10,20 @@ import { required } from "../../../../helpers/validate";
 type CustomPropsType = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   loading: boolean;
+  message: string;
+  error: boolean;
 };
 
-const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
+const Form: React.FC<{} & CustomPropsType> = ({
+  loading,
+  onSubmit,
+  message,
+  error
+}) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} autoComplete="off">
       <h1>Sing in</h1>
+
       <Field
         name="email"
         component={Input}
@@ -34,9 +43,17 @@ const Form: React.FC<{} & CustomPropsType> = ({ loading, onSubmit }) => {
         icon="far fa-user"
       />
 
-      <Button htmlType="submit" type="primary" loading={loading}>
-        Увійти
-      </Button>
+      {message && <div className={error ? "error" : "success"}>{message}</div>}
+
+      <Button htmlType="submit" type="primary" loading={loading} text="Enter" />
+
+      <Link to="/auth/reset-password">
+        <span>Reset password</span>
+      </Link>
+
+      <Link to="/auth/register">
+        <span>Register</span>
+      </Link>
     </form>
   );
 };

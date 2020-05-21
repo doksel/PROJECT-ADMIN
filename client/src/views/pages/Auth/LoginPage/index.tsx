@@ -1,54 +1,58 @@
-import React, { useState, FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FormEvent, useEffect } from "react";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { reduxForm, InjectedFormProps } from "redux-form";
-import { message } from "antd";
 
 import Form from "./Form";
 
-import { userLogin } from "../../../../store/authStore/actions";
-import { ERROR_MESSAGE } from "../../../../helpers/values";
+import { signIn } from "../../../../store/authStore/actions";
+import { AppDispatchType } from "../../../../store/store";
 
-import { WrapForm } from "./styles";
+import { WrapForm } from "../styles";
 
 interface CustomProps {}
 
-export type ValuesProps = {
+export type ValuesSignInTypes = {
   email: string;
   password: string;
 };
 
-let LoginPage: React.FC<InjectedFormProps<ValuesProps, CustomProps> &
-  CustomProps> = ({ handleSubmit }) => {
-  const [loading, setLoading] = useState<boolean>(false);
+type RootState = {
+  authStore: any;
+};
 
-  const dispatch = useDispatch();
-  const state = useSelector(state => {
-    return state;
-  });
+let LoginPage: React.FC<InjectedFormProps<ValuesSignInTypes, CustomProps> &
+  CustomProps> = ({ handleSubmit }) => {
+  const dispatch: AppDispatchType = useDispatch();
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+  const isLoading = useTypedSelector(state => state.authStore.isLoading);
+  const message = useTypedSelector(state => state.authStore.message);
+  const error = useTypedSelector(state => state.authStore.error);
 
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    handleSubmit((values: ValuesProps) => {
-      setLoading(true);
-
-      dispatch({ type: "LOGIN", payload: values });
+    handleSubmit((values: ValuesSignInTypes) => {
+      dispatch(signIn(values));
     })();
-
-    // dispatch(userLogin(values));
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   };
+
+  useEffect(() => {
+    dispatch({ type: "RESET_FORM" });
+  }, []);
 
   return (
     <WrapForm>
-      <Form onSubmit={formSubmit} loading={loading} />
+      <Form
+        onSubmit={formSubmit}
+        loading={isLoading}
+        message={message}
+        error={error}
+      />
     </WrapForm>
   );
 };
 
-export default reduxForm<ValuesProps, CustomProps>({
+export default reduxForm<ValuesSignInTypes, CustomProps>({
   form: "authForm"
 })(LoginPage);

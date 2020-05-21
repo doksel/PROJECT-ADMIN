@@ -4,26 +4,23 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import { Router } from "react-router-dom";
 
-import { ConfigProvider } from "antd";
-import ruRU from "antd/es/locale/ru_RU";
-
 import { App } from "./routes/loadable";
 import * as serviceWorker from "./serviceWorker";
 import { store, history, persistor } from "./store/store";
-
+import { ThemeProvider, theme } from "./styles/theme";
 import "./index.less";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        {/* <PersistGate persistor={persistor}> */}
         <Router history={history}>
-          <ConfigProvider locale={ruRU}>
-            <App />
-          </ConfigProvider>
+          <App />
         </Router>
-      </PersistGate>
-    </Provider>
+        {/* </PersistGate> */}
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

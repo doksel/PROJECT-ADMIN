@@ -1,7 +1,29 @@
 import { actionChannel, call, takeEvery, put } from "redux-saga/effects";
 import { client } from "../services/api.js";
 
-export function* sagaWatch({ payload }) {
+type PayloadType = {
+  query: {
+    method: string;
+    headers: {
+      Accept: string;
+      "Content-Type": string;
+    };
+    urlParams: string;
+  };
+  variables: any;
+  actions: Array<string>;
+};
+
+type SagaWatchType = {
+  type: string;
+  payload: PayloadType;
+};
+
+const saveTokenToLocalStorage = (token: string): void => {
+  localStorage.setItem("token", token);
+};
+
+export function* sagaWatch({ payload }: SagaWatchType) {
   const successAction = payload.actions[1];
   const failedAction = payload.actions[2];
   const requestAction = payload.actions[0];
@@ -26,10 +48,6 @@ export function* sagaWatch({ payload }) {
     yield put({ type: failedAction, payload: err });
   }
 }
-
-const saveTokenToLocalStorage = token => {
-  localStorage.setItem("token", token);
-};
 
 export default function*() {
   const requestChan = yield actionChannel("API");

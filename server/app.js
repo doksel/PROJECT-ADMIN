@@ -13,7 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 
-app.use(`/auth`, routers.auth);
+// app.use(`/auth`, routers.auth);
+app.use(path.join(process.env.API_BASE,'/auth'),  routers.auth);
+// app.use(`/users`, routers.users);
+app.use(path.join(process.env.API_BASE,'/users'),  routers.users);
 
 // default
 app.get("*", (req, res) => {

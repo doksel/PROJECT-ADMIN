@@ -1,33 +1,45 @@
-export const required = value =>
+import { KeyboardEvent } from "react";
+
+export const required = (value: string) =>
   (value && typeof value === "string" && !value.match(/^\s+$/)) ||
   (value && typeof value !== "string")
     ? undefined
-    : "Обов'язково для заповнення";
+    : "Required";
 
-export const required_RadioButton = value =>
-  typeof value === "boolean" ? undefined : "Обов'язково для заповнення";
-
-export const required_Series_Of_Doc = value =>
-  value || typeof value === "number"
+export const hardpassword = (value: string) =>
+  value &&
+  value.length >= 6 &&
+  value.match(
+    /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
+  )
     ? undefined
-    : "Серія обов'язково для заповнення";
+    : "Password must be stored no less than 6 characters and it is guilty of greatness and small Latin characters, numbers and special characters.";
 
-export const required_files = value =>
-  value && value.length > 0 ? undefined : "Обов'язково для заповнення";
+export const checkPasswords = (value: string, form: any) =>
+  form.password !== form.re_password
+    ? "The password must be the same"
+    : undefined;
 
-export const letter_Series_Of_Doc = value =>
+export const required_RadioButton = (value: string) =>
+  typeof value === "boolean" ? undefined : "Required";
+
+export const required_Series_Of_Doc = (value: string) =>
+  value || typeof value === "number" ? undefined : "The series is required";
+
+export const required_files = (value: string) =>
+  value && value.length > 0 ? undefined : "Required";
+
+export const letter_Series_Of_Doc = (value: string) =>
   value && !value.match(/^[A-Za-zА-Яа-яЁё]+$/)
     ? "Серія містить тільки літери"
     : value && (value.length > 3 || value.length < 2)
     ? `У серії повинно бути 2 або 3 символи`
     : undefined;
 
-export const required_Number_Of_Doc = value =>
-  value || typeof value === "number"
-    ? undefined
-    : "Номер обов'язково для заповнення";
+export const required_Number_Of_Doc = (value: string) =>
+  value || typeof value === "number" ? undefined : "The number is required";
 
-export const required_UNZR = value =>
+export const required_UNZR = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -35,14 +47,14 @@ export const required_UNZR = value =>
     ? undefined
     : "УНЗР маэ формат 00000000-00000";
 
-export const number_Number_Of_Doc = value =>
+export const number_Number_Of_Doc = (value: string) =>
   value && isNaN(Number(value))
     ? "Номер містить тільки цифри"
     : value.length !== 6
     ? `Повинно бути 6 символів`
     : undefined;
 
-export const numberPaymentDoc = value =>
+export const numberPaymentDoc = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -50,17 +62,17 @@ export const numberPaymentDoc = value =>
     ? "Тільки латинські букви, цифри, тире і пробіл"
     : undefined;
 
-export const maxValue = max => value =>
+export const maxValue = (max: number) => (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
-  (value && value <= max)
+  (value && +value <= max)
     ? undefined
     : `Значення повинно бути менше ${max}`;
 
 export const maxValue1000000 = maxValue(1000000);
 
-export const maxLength = max => value =>
+export const maxLength = (max: number) => (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -68,7 +80,7 @@ export const maxLength = max => value =>
     ? undefined
     : `Повинно бути ${max} символів чи менше`;
 
-export const minLength = min => value =>
+export const minLength = (min: number) => (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -76,26 +88,12 @@ export const minLength = min => value =>
     ? undefined
     : `Повинно бути ${min} символів чи більше`;
 
-export const maxLength60 = maxLength(60);
+export const maxLength60 = maxLength(10);
 
-export const maxLength7 = maxLength(7);
-
-export const maxLength70 = maxLength(70);
-
-export const maxLength50 = maxLength(50);
-
-export const maxLength10 = maxLength(10);
-
-export const maxLength255 = maxLength(255);
-
-export const maxLength120 = maxLength(120);
-
-export const maxLength1000 = maxLength(1000);
-
-export const number = value =>
+export const number = (value: string) =>
   value && isNaN(Number(value)) ? "Повинно бути числом" : undefined;
 
-export const email = value =>
+export const email = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -103,7 +101,7 @@ export const email = value =>
     ? undefined
     : "Введіть коректну E-mail адресу";
 
-export const letter = value =>
+export const letter = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -111,7 +109,7 @@ export const letter = value =>
     ? undefined
     : "Введіть тільки літери";
 
-export const latinLetter = value =>
+export const latinLetter = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -119,7 +117,7 @@ export const latinLetter = value =>
     ? undefined
     : "Введіть літери тільки латинською";
 
-export const cyrillicLetter = value =>
+export const cyrillicLetter = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -127,7 +125,7 @@ export const cyrillicLetter = value =>
     ? undefined
     : "Введіть літери тільки кирилицею";
 
-export const cyrillicUaLetter = value =>
+export const cyrillicUaLetter = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -135,7 +133,7 @@ export const cyrillicUaLetter = value =>
     ? undefined
     : "Введіть літери тільки українськоою";
 
-export const cyrillicRuLetter = value =>
+export const cyrillicRuLetter = (value: string) =>
   value === "" ||
   value === null ||
   value === undefined ||
@@ -143,29 +141,35 @@ export const cyrillicRuLetter = value =>
     ? undefined
     : "Введіть літери тільки українськоою";
 
-export const minValue = min => value =>
-  value && value < min ? `Повинно бути принаймні ${min}` : undefined;
+export const minValue = (min: number) => (value: string) =>
+  value && +value < min ? `Повинно бути принаймні ${min}` : undefined;
 
-export const alphaOnly = e =>
+export const alphaOnly = (e: KeyboardEvent) =>
   (e.charCode > 64 && e.charCode < 91) || (e.charCode > 96 && e.charCode < 123);
 
-export const number_Taxpayer = value =>
+export const number_Taxpayer = (value: string) =>
   value && isNaN(Number(value))
     ? "Номер містить тільки цифри"
     : value && isNaN(Number(value)) && value.length !== 10
     ? "Номер містить 10 цифр"
     : undefined;
 
-export const checkPaidAmount = (value, form) =>
+export const checkPaidAmount = (value: string, form: any) =>
   value && form.consularFee > +value
     ? "Фактично сплачена сума не повинна бути менше консульського збору"
     : undefined;
 
 export const getAgeForDatepicker = (year = 0) => {
-  let date = {};
-  let day = 24 * 60 * 60 * 1000;
-  var dateOffset = day * 365 * year + day * 3; //16 years
-  var myDate = new Date();
+  type dateTypes = {
+    defaultPickerValue?: Date;
+    disabledDate?: any;
+  };
+  type myDateTypes = Date | any;
+
+  let date: dateTypes = {};
+  let day: number = 24 * 60 * 60 * 1000;
+  var dateOffset: number = day * 365 * year + day * 3; //16 years
+  var myDate: myDateTypes = new Date();
 
   myDate.setTime(myDate.getTime() - dateOffset);
 
@@ -182,15 +186,7 @@ export const getAgeForDatepicker = (year = 0) => {
 
 export const minus16Years_DatePicker = getAgeForDatepicker(16);
 
-export const maskUNZR = (e, input) => {
-  if (input.value && input.value.length === 8 && e.keyCode !== 8) {
-    input.onChange(`${input.value}-`);
-  } else if (input.value && input.value.length === 8 && e.keyCode === 8) {
-    input.onChange(input.value.substr(0, 7));
-  }
-};
-
-export const alphaNumeric = value =>
+export const alphaNumeric = (value: string) =>
   value && /[^a-zA-ZА-Яа-яЁёЇїІіЄєҐґ'`0-9 ]/i.test(value)
     ? "Тільки буквено-цифрові символи"
     : undefined;

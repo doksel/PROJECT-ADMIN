@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bg from "../../../images/main_bg.jpg";
 
 export const WrapForm = styled.div`
   width: 100%;
@@ -8,8 +9,10 @@ export const WrapForm = styled.div`
   justify-content: center;
   background-color: #cececece;
   position: fixed;
+  background: url(${bg}) center;
+  background-size: cover;
 
-  form{
+  form {
     width: 100%;
     max-width: 450px;
     display: flex;
@@ -19,23 +22,10 @@ export const WrapForm = styled.div`
     padding: 60px;
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
 
-    h1{ 
+    h1 {
       text-align: center;
     }
-  }
-`;
- 
-export const WrapButton = styled.div`
-  margin-top: 60px;
-`;
-
-export const WrapInput = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  img {
-    width: 22px;
   }
 `;
