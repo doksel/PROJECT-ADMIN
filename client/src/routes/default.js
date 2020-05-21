@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 const DefaultRoute = ({ user }) => {
   let path;
-  
+
   if (user) {
     path = "admin";
   } else {
@@ -14,6 +14,6 @@ const DefaultRoute = ({ user }) => {
   return <Redirect to={path} />;
 };
 
-const mapStateToProps = ({userStore}) => ({...userStore});
+const mapStateToProps = ({ authStore }) => ({ ...authStore });
 
 export default connect(mapStateToProps)(DefaultRoute);

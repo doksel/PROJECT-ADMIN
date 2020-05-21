@@ -1,18 +1,26 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatchType } from "../../../store/store";
 
 import Icon from "../../common/Icon";
-import Exit from "../../../images/icons/exit.svg";
-import User from "../../../images/icons/user.svg";
+import ExitIcon from "../../../images/icons/exit.svg";
+import EnterIcon from "../../../images/icons/enter.svg";
+import UserIcon from "../../../images/icons/user.svg";
 
 import { WrapHeader, Profile } from "./styles";
+
+type RootState = {
+  authStore: any;
+};
 
 const Header: React.FC = () => {
   let history = useHistory();
   const titles = history.location.pathname.split("/");
   const dispatch: AppDispatchType = useDispatch();
+
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const User = useTypedSelector(state => state.authStore.user);
 
   return (
     <WrapHeader>
@@ -21,8 +29,20 @@ const Header: React.FC = () => {
       </h2>
 
       <Profile>
-        <Icon onClick={() => console.log("profile")} icon={User} />
-        <Icon onClick={() => dispatch({ type: "USER_LOGOUT" })} icon={Exit} />
+        {User && (
+          <>
+            <div>{User.firstName}</div>
+            <Icon
+              onClick={() => history.push("/admin/account/profile")}
+              icon={UserIcon}
+            />
+          </>
+        )}
+
+        <Icon
+          onClick={() => dispatch({ type: "USER_LOGOUT" })}
+          icon={EnterIcon}
+        />
       </Profile>
     </WrapHeader>
   );

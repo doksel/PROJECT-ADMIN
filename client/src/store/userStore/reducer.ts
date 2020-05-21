@@ -1,8 +1,7 @@
 import {
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAIL,
-  USER_LOGOUT
+  GET_USERS_REQUEST,
+  GET_USERS_SUCCESS,
+  GET_USERS_FAIL
 } from "./actions";
 
 type ErrorsType = {
@@ -19,7 +18,7 @@ type UserType = {
 };
 
 const initialState = {
-  user: null as UserType | null,
+  users: null as Array<UserType> | null,
   isLoading: false,
   error: false,
   errors: null as ErrorsType | null,
@@ -38,7 +37,7 @@ export default (
   { type, payload }: AuthUserActionType
 ): InitialStateType => {
   switch (type) {
-    case GET_USER_REQUEST:
+    case GET_USERS_REQUEST:
       return {
         ...state,
         error: false,
@@ -46,14 +45,14 @@ export default (
         isLoading: true
       };
 
-    case GET_USER_SUCCESS:
+    case GET_USERS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        user: payload.user
+        users: payload.users
       };
 
-    case GET_USER_FAIL:
+    case GET_USERS_FAIL:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -61,12 +60,6 @@ export default (
         errors: payload.errors,
         message: payload.message,
         isLoading: false
-      };
-
-    case USER_LOGOUT:
-      localStorage.removeItem("token");
-      return {
-        ...initialState
       };
     default:
       return state;

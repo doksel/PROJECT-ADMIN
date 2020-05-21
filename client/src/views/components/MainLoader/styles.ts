@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 type LoaderPropsType = {
   color?: string;
+  loading?: boolean;
 };
 
-export const WrapLoader = styled.div`
+export const WrapLoader = styled.div<LoaderPropsType>`
   width: 100vw;
   height: 100vh;
-  display: flex;
+  display: ${props => (props.loading ? "flex" : "none")};
   align-items: center;
   background: rgba(226, 226, 226, 0.5);
 `;

@@ -1,38 +1,25 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { Route } from "react-router-dom";
 
 import Header from "../../layout/Header";
 import Content from "../../layout/Content";
 import Footer from "../../layout/Footer";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
-import { me, getUsers } from "../../../store/userStore/actions";
+import Main from "../Main";
+import Profile from "../Account/Profile";
+import Form from "../Account/Form";
 
 const Admin: React.FC = () => {
-  const dispatch = useDispatch();
-
   return (
     <>
       <Header />
       <Breadcrumbs crumbs={[]} />
 
       <Content>
-        <h1>Admin page</h1>
-        <button
-          onClick={() => {
-            dispatch(me());
-            console.log("click");
-          }}
-        >
-          Click
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getUsers());
-          }}
-        >
-          Click
-        </button>
+        <Route path="/admin" exact render={() => <Main />} />
+        <Route path="/admin/account/profile" exact render={() => <Profile />} />
+        <Route path="/admin/account/form" exact render={() => <Form />} />
       </Content>
 
       <Footer />

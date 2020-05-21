@@ -14,7 +14,15 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL";
 
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAIL = "GET_USER_FAIL";
+
+export const USER_LOGOUT = "USER_LOGOUT";
+
 export const RESET_FORM = "RESET_FORM";
+
+const token = localStorage.getItem("token");
 
 export const signIn = (payload: ValuesSignInTypes) => ({
   type: "API",
@@ -65,5 +73,22 @@ export const resetPassword = (payload: ValuesResetPasswordType) => ({
       RESET_PASSWORD_SUCCESS,
       RESET_PASSWORD_FAIL
     ]
+  }
+});
+
+export const me = () => ({
+  type: "API",
+  payload: {
+    query: {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      urlParams: `/users/account`
+    },
+    variables: null,
+    actions: [GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAIL]
   }
 });

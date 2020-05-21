@@ -8,7 +8,11 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
-  RESET_FORM
+  RESET_FORM,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAIL,
+  USER_LOGOUT
 } from "./actions";
 
 type ErrorsType = {
@@ -18,13 +22,21 @@ type ErrorsType = {
   location: string;
 };
 
+type UserType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 const initialState = {
   userId: null as string | null,
   reseted: false,
   registered: false,
+  isLogged: false,
   token: null as string | null,
+  user: null as UserType | null,
   admin: false,
-  isLoading: false,
+  isLoading: true,
   error: false,
   errors: null as ErrorsType | null,
   message: ""
@@ -47,7 +59,8 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true
+        isLoading: true,
+        isLogged: false
       };
 
     case SIGN_IN_SUCCESS:
@@ -57,7 +70,8 @@ export default (
         isLoading: false,
         token: payload.token,
         userId: payload.userId,
-        admin: payload.admin
+        admin: payload.admin,
+        isLogged: true
       };
 
     case SIGN_IN_FAIL:
@@ -130,7 +144,38 @@ export default (
         message: "",
         isLoading: false
       };
+    case GET_USER_REQUEST:
+      return {
+        ...state,
+        error: false,
+        errors: null,
+        isLoading: true,
+        isLogged: false
+      };
 
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isLogged: true,
+        user: payload.user
+      };
+
+    case GET_USER_FAIL:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        error: true,
+        errors: payload.errors,
+        message: payload.message,
+        isLoading: false
+      };
+
+    case USER_LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

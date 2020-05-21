@@ -5,7 +5,7 @@ import { Route, Redirect } from "react-router-dom";
 const GuestRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={props => {      
       if (!user) {
         return <Component {...props} />;
       }
@@ -15,6 +15,6 @@ const GuestRoute = ({ component: Component, user, ...rest }) => (
   />
 );
 
-const mapStateToProps = ({userStore}) => ({...userStore});
+const mapStateToProps = ({authStore}) => ({...authStore});
 
 export default connect(mapStateToProps)(GuestRoute);

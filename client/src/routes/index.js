@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -10,23 +10,26 @@ import MainLoader from "../views/components/MainLoader"
 
 import Auth from "../views/pages/Auth";
 import Admin from "../views/pages/Admin";
-import { me } from "../store/userStore/actions";
+import { me } from "../store/authStore/actions";
 
 
-const App = ({token, isLoading}) => {
+const App = ({ userId, isLoading, isLogged}) => {  
   const dispatch = useDispatch();
-  const tokens = token || localStorage.getItem("token")
+  const token = localStorage.getItem("token")
 
   useEffect(()=>{
-    tokens && dispatch(me());
-  },[tokens])
-  
+    token && dispatch(me());
+  },[])
+
+  useEffect(()=>{
+    token && isLogged && userId && dispatch(me());
+  },[userId])
+
   return (
       <>
-        {isLoading ? (
-          <MainLoader/>
-        ) :
-         (
+        {isLoading ? 
+          <MainLoader /> 
+        : (
           <div className="main">
             <Switch>
               <Route path="/" exact component={DefaultRoute} /> 
@@ -45,6 +48,6 @@ const App = ({token, isLoading}) => {
     )
   }
 
-  const mapStateToProps = ({authStore}) => ({...authStore});
+  const mapStateToProps = ({ authStore }) => ({...authStore});
 
   export default connect(mapStateToProps)(App);

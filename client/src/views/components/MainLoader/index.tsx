@@ -2,8 +2,12 @@ import React from "react";
 
 import { WrapLoader, Loader } from "./styles";
 
-const MainLoader = () => (
-  <WrapLoader>
+type MainLoaderType = {
+  loading?: boolean;
+};
+
+const MainLoader: React.FC<MainLoaderType> = ({ loading }) => (
+  <WrapLoader loading={loading}>
     <Loader />
   </WrapLoader>
 );

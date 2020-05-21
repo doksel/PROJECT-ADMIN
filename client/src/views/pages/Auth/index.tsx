@@ -4,7 +4,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import ResetPassword from "./ResetPassword";
 
-const Auth = () => (
+const Auth: React.FC = () => (
   <>
     <Route path="/auth/login" exact render={() => <LoginPage />} />
     <Route path="/auth/register" exact render={() => <RegisterPage />} />
