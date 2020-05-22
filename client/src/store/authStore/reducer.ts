@@ -26,6 +26,7 @@ type UserType = {
   firstName: string;
   lastName: string;
   email: string;
+  avatar: string;
 };
 
 const initialState = {
@@ -36,7 +37,7 @@ const initialState = {
   token: null as string | null,
   user: null as UserType | null,
   admin: false,
-  isLoading: true,
+  isLoading: false,
   error: false,
   errors: null as ErrorsType | null,
   message: ""
@@ -144,6 +145,7 @@ export default (
         message: "",
         isLoading: false
       };
+
     case GET_USER_REQUEST:
       return {
         ...state,
@@ -174,7 +176,8 @@ export default (
     case USER_LOGOUT:
       localStorage.removeItem("token");
       return {
-        ...initialState
+        ...initialState,
+        isLoading: false
       };
     default:
       return state;

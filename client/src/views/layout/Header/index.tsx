@@ -29,20 +29,21 @@ const Header: React.FC = () => {
       </h2>
 
       <Profile>
-        {User && (
+        {User ? (
           <>
             <div>{User.firstName}</div>
             <Icon
               onClick={() => history.push("/admin/account/profile")}
               icon={UserIcon}
             />
+            <Icon
+              onClick={() => dispatch({ type: "USER_LOGOUT" })}
+              icon={ExitIcon}
+            />
           </>
+        ) : (
+          <Icon onClick={() => console.log("enter")} icon={EnterIcon} />
         )}
-
-        <Icon
-          onClick={() => dispatch({ type: "USER_LOGOUT" })}
-          icon={EnterIcon}
-        />
       </Profile>
     </WrapHeader>
   );
