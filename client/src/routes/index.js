@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
@@ -11,60 +11,42 @@ import Auth from "../views/pages/Auth";
 import Admin from "../views/pages/Admin";
 import { me } from "../store/authStore/actions";
 
-
-// const App = ({ userId, isLoading, isLogged }) => {  
-  const App = ({ me, userId, isLoading, isLogged }) => {  
-  const [loading, setLoading] = useState(true)
+const App = ({ me, user, userId, isLoading }) => {  
   const dispatch = useDispatch();
   const token = localStorage.getItem("token")
 
-  const getMe = async() => {
-    if(token){
-      await me()
-    }
-    setLoading(false)
-  }
-
   useEffect(()=>{
-    getMe()
+    if(token) {
+      dispatch(me())
+    };
   },[])
 
   useEffect(()=>{
-    if(isLogged && userId) {
-      setLoading(true)
-      getMe()}
-  },[userId])
-
-  // useEffect(()=>{
-  //   token && dispatch(me());
-  // },[])
-
-  // useEffect(()=>{
-  //   token && isLogged && userId && dispatch(me());
-  // },[userId])
+    if(token && !user && userId) {
+      dispatch(me());
+    }
+  },[token, user, userId, dispatch])
 
   return (
     <>
-    <MainLoader loading={loading}/> 
+      <MainLoader loading={isLoading}/> 
 
-        {!loading && ( 
-          <div className="main">
-            <Switch>
-              <Route path="/" exact component={DefaultRoute} /> 
-              
-              <GuestRoute path="/auth/:type" exact component={Auth} />
-              
-              <PrivateRoute
-                path="/admin/:category?/:action?/:id?"
-                exact
-                component={Admin}
-              />
-              <Redirect to="/" />
-            </Switch>
-          </div>
-        )}
-      </>
-    )
+      {!isLoading && ( 
+        <div className="main">
+          <Switch>
+            <Route path="/" exact component={DefaultRoute} /> 
+            
+            <GuestRoute path="/auth/:type" exact component={Auth} />
+            
+            <PrivateRoute
+              path="/admin/:category?/:action?/:id?"
+              exact
+              component={Admin}
+            />
+          </Switch>
+        </div>
+      )}
+    </>)
   }
 
   const mapStateToProps = ({ authStore }) => ({...authStore});

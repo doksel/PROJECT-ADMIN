@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
-import Icon from "../../common/Icon";
-import UserIcon from "../../../images/icons/eye.svg";
+import Table from "../../components/Table";
 
 import { getUsers } from "../../../store/userStore/actions";
 
-import { Title } from "./styles";
+import { MainTitle } from "./styles";
 
 type RootState = {
   userStore: any;
@@ -29,25 +28,20 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <h1>Main page</h1>
-      {usersList &&
-        usersList.map((user: any, index: number) => {
-          return (
-            <div>
-              <Title>
-                <div>User {index} </div>
-                <Icon
-                  onClick={() => history.push("/admin/account/profile")}
-                  icon={UserIcon}
-                />
-              </Title>
-              <div>FirstName: {user.firstName}</div>
-              <div>LastName: {user.lastName}</div>
-              <div>Email: {user.email}</div>
-              <span>----------------------------</span>
-            </div>
-          );
-        })}
+      <MainTitle>Main page</MainTitle>
+
+      {isLoading ? (
+        <div>Loading.....</div>
+      ) : (
+        <Table
+          columns={[
+            { title: "firstName", field: "firstName" },
+            { title: "lastName", field: "lastName" },
+            { title: "email", field: "email" }
+          ]}
+          data={usersList}
+        />
+      )}
     </>
   );
 };

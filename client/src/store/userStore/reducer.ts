@@ -53,7 +53,6 @@ export default (
       };
 
     case GET_USERS_FAIL:
-      localStorage.removeItem("token");
       return {
         ...state,
         error: true,

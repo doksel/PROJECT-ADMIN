@@ -133,6 +133,4 @@ router.post('/reset-password', async (req,res)=>{
   
 })
 
-router.post('login', async (req,res)=>{})
-
 export default router;

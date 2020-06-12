@@ -32,8 +32,6 @@ type UserType = {
 const initialState = {
   userId: null as string | null,
   reseted: false,
-  registered: false,
-  isLogged: false,
   token: null as string | null,
   user: null as UserType | null,
   admin: false,
@@ -60,19 +58,18 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true,
-        isLogged: false
+        isLoading: true
       };
 
     case SIGN_IN_SUCCESS:
       payload.token !== null && localStorage.setItem("token", payload.token);
+
       return {
         ...state,
         isLoading: false,
         token: payload.token,
         userId: payload.userId,
-        admin: payload.admin,
-        isLogged: true
+        admin: payload.admin
       };
 
     case SIGN_IN_FAIL:
@@ -91,7 +88,6 @@ export default (
         ...state,
         error: false,
         errors: null,
-        registered: false,
         isLoading: true
       };
 
@@ -99,7 +95,6 @@ export default (
       return {
         ...state,
         isLoading: false,
-        registered: true,
         admin: payload.admin
       };
 
@@ -151,20 +146,19 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true,
-        isLogged: false
+        isLoading: true
       };
 
     case GET_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isLogged: true,
         user: payload.user
       };
 
     case GET_USER_FAIL:
       localStorage.removeItem("token");
+
       return {
         ...state,
         error: true,
@@ -175,6 +169,7 @@ export default (
 
     case USER_LOGOUT:
       localStorage.removeItem("token");
+
       return {
         ...initialState,
         isLoading: false

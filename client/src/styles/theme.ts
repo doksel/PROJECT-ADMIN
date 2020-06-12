@@ -17,6 +17,7 @@ export const theme = {
     primary: "royalblue",
     success: "limegreen",
     error: "crimson",
+    red: "crimson",
     disabled: "darkgrey",
     main_hover: "lightslategray",
     secondary_hover: "darkgray",
