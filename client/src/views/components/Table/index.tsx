@@ -2,51 +2,54 @@ import React from "react";
 import { MaterialTableProps } from "material-table";
 
 import TableUI from "../../ui/Table";
+import TableAction from "../TableAction";
+import ManIcon from "../../../images/icons/man.svg";
 
-import { TableType } from "./types";
+import { TablePropsType } from "./types";
 import { WrapTable } from "./styles";
-import { EditOutlined, Visibility, DeleteForever } from "@material-ui/icons";
 
-import { theme } from "../../../styles/theme";
-const Table: React.FC<MaterialTableProps<TableType>> = ({
+const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
   title,
   columns,
-  data
+  data,
+  canView,
+  canEdit,
+  canDelete
 }) => {
   return (
     <WrapTable>
       {data && (
         <TableUI
-          columns={columns}
-          data={data}
-          title={title}
-          actions={[
+          columns={[
             {
-              icon: () => (
-                <Visibility style={{ color: theme.colors.primary }} />
-              ),
-              tooltip: "Add User",
-              onClick: (event, rowData) => console.log("You saved ", rowData)
+              field: "avatar",
+              title: "Avatar",
+              tooltip: "Avatar",
+              render: (rowData: any) =>
+                rowData.avatar && rowData.avatar.length ? (
+                  <img src={""} style={{ width: 50, borderRadius: "50%" }} />
+                ) : (
+                  <img
+                    src={ManIcon}
+                    style={{ width: 40, borderRadius: "50%" }}
+                  />
+                )
             },
+            ...columns,
             {
-              icon: () => (
-                <EditOutlined style={{ color: theme.colors.primary }} />
-              ),
-              tooltip: "Edit User",
-              iconProps: { color: "error" },
-              onClick: (event, rowData) =>
-                console.log("You want to Edit ", rowData),
-              disabled: false
-            },
-            {
-              icon: () => <DeleteForever style={{ color: theme.colors.red }} />,
-              tooltip: "Delete User",
-              iconProps: { color: "error" },
-              onClick: (event, rowData) =>
-                console.log("You want to delete ", rowData),
-              disabled: false
+              title: "Actions",
+              tooltip: "Actions",
+              render: rowData => (
+                <TableAction
+                  canView={canView}
+                  canEdit={canEdit}
+                  canDelete={canDelete}
+                />
+              )
             }
           ]}
+          data={data}
+          title={title}
         />
       )}
     </WrapTable>

@@ -40,6 +40,9 @@ const Main: React.FC = () => {
             { title: "email", field: "email" }
           ]}
           data={usersList}
+          canView={() => console.log("canView")}
+          canEdit={() => console.log("canEdit")}
+          canDelete={() => console.log("canDelete")}
         />
       )}
     </>

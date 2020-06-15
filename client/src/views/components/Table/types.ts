@@ -25,3 +25,16 @@ export type TableType = {
   columns?: Array<TypeColumns>;
   data?: Array<TypeData>;
 };
+
+export type TablePropsType = {
+  canView?: () => void;
+  canEdit?: () => void;
+  canDelete?: () => void;
+};
+
+export type RowDataType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar: any;
+};

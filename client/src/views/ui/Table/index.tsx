@@ -10,20 +10,16 @@ import {
   Clear,
   DeleteOutline,
   Edit,
-  EditOutlined,
   FilterList,
   FirstPage,
   LastPage,
   Remove,
   SaveAlt,
   Search,
-  ViewColumn,
-  Visibility,
-  DeleteForever
+  ViewColumn
 } from "@material-ui/icons";
 
-import { theme } from "../../../styles/theme";
-import { TableType, PropsTableType } from "./types";
+import { TablePropsType } from "./types";
 import { WrapTable } from "./styles";
 
 const tableIcons: Icons = {
@@ -50,8 +46,12 @@ const tableIcons: Icons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const TableUI: React.FC<MaterialTableProps<TableType & PropsTableType> &
-  PropsTableType> = ({ title, columns, data, actions }) => {
+const TableUI: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
+  title,
+  columns,
+  data,
+  actions
+}) => {
   return (
     <WrapTable>
       <MaterialTable
@@ -63,31 +63,6 @@ const TableUI: React.FC<MaterialTableProps<TableType & PropsTableType> &
           actionsColumnIndex: -1
         }}
         actions={actions}
-        // actions={[
-        //   {
-        //     icon: () => <Visibility style={{ color: theme.colors.primary }} />,
-        //     tooltip: "Add User",
-        //     onClick: (event, rowData) => console.log("You saved ", rowData)
-        //   },
-        //   {
-        //     icon: () => (
-        //       <EditOutlined style={{ color: theme.colors.primary }} />
-        //     ),
-        //     tooltip: "Edit User",
-        //     iconProps: { color: "error" },
-        //     onClick: (event, rowData) =>
-        //       console.log("You want to Edit ", rowData),
-        //     disabled: false
-        //   },
-        //   {
-        //     icon: () => <DeleteForever style={{ color: theme.colors.red }} />,
-        //     tooltip: "Delete User",
-        //     iconProps: { color: "error" },
-        //     onClick: (event, rowData) =>
-        //       console.log("You want to delete ", rowData),
-        //     disabled: false
-        //   }
-        // ]}
       />
     </WrapTable>
   );

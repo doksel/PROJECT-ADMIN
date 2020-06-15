@@ -26,10 +26,8 @@ export type TableType = {
   data?: Array<TypeData>;
 };
 
-export type PropsTableType = {
-  actions?: Array<{
-    icon: () => Element;
-    tooltip: string;
-    onClick: (event: any, rowData: any) => void;
-  }>;
+export type TablePropsType = {
+  canView?: boolean;
+  canEdit?: boolean;
+  canDelete?: boolean;
 };
