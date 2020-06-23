@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import DefaultRoute from "./default";
 import GuestRoute from "./hoc/GuestRoute.js";
@@ -11,7 +11,8 @@ import Auth from "../views/pages/Auth";
 import Admin from "../views/pages/Admin";
 import { me } from "../store/authStore/actions";
 
-const App = ({ me, user, userId, isLoading }) => {  
+const App = ({ me, user, userId }) => {  
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token")
 
@@ -25,13 +26,14 @@ const App = ({ me, user, userId, isLoading }) => {
     if(token && !user && userId) {
       dispatch(me());
     }
+    user && setLoading(false);
   },[token, user, userId, dispatch])
 
   return (
     <>
-      <MainLoader loading={isLoading}/> 
+      <MainLoader loading={loading}/> 
 
-      {!isLoading && ( 
+      {!loading && ( 
         <div className="main">
           <Switch>
             <Route path="/" exact component={DefaultRoute} /> 

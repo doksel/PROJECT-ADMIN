@@ -17,9 +17,9 @@ const Admin: React.FC = () => {
       <Breadcrumbs crumbs={[]} />
 
       <Content>
-        <Route path="/admin" exact render={() => <Main />} />
         <Route path="/admin/account/profile" exact render={() => <Profile />} />
         <Route path="/admin/account/form" exact render={() => <Form />} />
+        <Route path="/admin" exact render={() => <Main />} />
       </Content>
 
       <Footer />

@@ -41,17 +41,17 @@ const initialState = {
   message: ""
 };
 
-export type InitialStateType = typeof initialState;
+export type InitialStateAuthUserType = typeof initialState;
 
 export type AuthUserActionType = {
   type: string;
-  payload: InitialStateType;
+  payload: InitialStateAuthUserType;
 };
 
 export default (
-  state: InitialStateType = initialState,
+  state: InitialStateAuthUserType = initialState,
   { type, payload }: AuthUserActionType
-): InitialStateType => {
+): InitialStateAuthUserType => {
   switch (type) {
     case SIGN_IN_REQUEST:
       return {

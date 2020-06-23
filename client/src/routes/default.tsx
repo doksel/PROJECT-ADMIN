@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import { InitialStateAuthUserType } from "../store/authStore/reducer";
+
 const DefaultRoute = ({ user }) => {
   let path;
 
@@ -14,6 +16,8 @@ const DefaultRoute = ({ user }) => {
   return <Redirect to={path} />;
 };
 
-const mapStateToProps = ({ authStore }) => ({ ...authStore });
+const mapStateToProps: InitialStateAuthUserType = ({ authStore }) => ({
+  ...authStore
+});
 
 export default connect(mapStateToProps)(DefaultRoute);
