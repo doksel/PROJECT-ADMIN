@@ -44,32 +44,37 @@ const App: React.FC<PropsType> = ({ me, user, userId, isLoading }) => {
     <>
       <MainLoader loading={isLoading} />
 
-      {token ? (
-        <>
-          <MainLoader loading={loading} />
+      <div className="main token">
+        <Switch>
+          <Route path="/" exact component={DefaultRoute} />
 
-          {!loading && (
-            <div className="main token">
-              <Switch>
-                <Route path="/" exact component={DefaultRoute} />
+          {token ? (
+            <>
+              <MainLoader loading={loading} />
 
-                <PrivateRoute
-                  path="/admin/:category?/:action?/:id?"
-                  exact
-                  component={Admin}
-                />
-              </Switch>
-            </div>
+              {!loading && (
+                <>
+                  <GuestRoute path="/auth/:type" exact component={Auth} />
+                  <PrivateRoute
+                    path="/admin/:category?/:action?/:id?"
+                    exact
+                    component={Admin}
+                  />
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <GuestRoute path="/auth/:type" exact component={Auth} />
+              <PrivateRoute
+                path="/admin/:category?/:action?/:id?"
+                exact
+                component={Admin}
+              />
+            </>
           )}
-        </>
-      ) : (
-        <div className="main not_token">
-          <Switch>
-            <Route path="/" exact component={DefaultRoute} />
-            <GuestRoute path="/auth/:type" exact component={Auth} />
-          </Switch>
-        </div>
-      )}
+        </Switch>
+      </div>
     </>
   );
 };
