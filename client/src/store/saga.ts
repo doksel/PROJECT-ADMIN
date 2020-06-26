@@ -7,6 +7,7 @@ type PayloadType = {
     headers: {
       Accept: string;
       "Content-Type": string;
+      Authorization?: string;
     };
     urlParams: string;
   };
@@ -14,10 +15,12 @@ type PayloadType = {
   actions: Array<string>;
 };
 
-type SagaWatchType = {
+export type SagaWatchType = {
   type: string;
   payload: PayloadType;
 };
+
+export type ActionType = () => SagaWatchType;
 
 const saveTokenToLocalStorage = (token: string): void => {
   localStorage.setItem("token", token);

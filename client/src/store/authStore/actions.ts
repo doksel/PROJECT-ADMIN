@@ -1,6 +1,7 @@
 import { ValuesSignInTypes } from "../../views/pages/Auth/LoginPage";
 import { ValuesSignUpTypes } from "../../views/pages/Auth/RegisterPage";
 import { ValuesResetPasswordType } from "../../views/pages/Auth/ResetPassword";
+import { SagaWatchType } from "../saga";
 
 export const SIGN_IN_REQUEST = "SIGN_IN_REQUEST";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
@@ -24,7 +25,7 @@ export const RESET_FORM = "RESET_FORM";
 
 const token = localStorage.getItem("token");
 
-export const signIn = (payload: ValuesSignInTypes) => ({
+export const signIn = (payload: ValuesSignInTypes): SagaWatchType => ({
   type: "API",
   payload: {
     query: {
@@ -40,7 +41,7 @@ export const signIn = (payload: ValuesSignInTypes) => ({
   }
 });
 
-export const signUp = (payload: ValuesSignUpTypes) => ({
+export const signUp = (payload: ValuesSignUpTypes): SagaWatchType => ({
   type: "API",
   payload: {
     query: {
@@ -56,7 +57,9 @@ export const signUp = (payload: ValuesSignUpTypes) => ({
   }
 });
 
-export const resetPassword = (payload: ValuesResetPasswordType) => ({
+export const resetPassword = (
+  payload: ValuesResetPasswordType
+): SagaWatchType => ({
   type: "API",
   payload: {
     query: {
@@ -76,7 +79,7 @@ export const resetPassword = (payload: ValuesResetPasswordType) => ({
   }
 });
 
-export const me = () => ({
+export const me = (): SagaWatchType => ({
   type: "API",
   payload: {
     query: {
