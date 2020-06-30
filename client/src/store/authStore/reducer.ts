@@ -22,7 +22,7 @@ type ErrorsType = {
   location: string;
 };
 
-type UserType = {
+export type UserType = {
   firstName: string;
   lastName: string;
   email: string;

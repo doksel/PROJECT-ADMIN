@@ -1,11 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, RouteProps } from "react-router-dom";
 
-import { InitialStateAuthUserType } from "../store/authStore/reducer";
+import { UserType } from "../store/authStore/reducer";
+import { AppDispatchType } from "../store/store";
 
-const DefaultRoute = ({ user }) => {
+type PropsType = {
+  user?: UserType;
+};
+
+const DefaultRoute: React.FC<RouteProps & PropsType> = ({ user }) => {
   let path;
+
+  console.log(user);
 
   if (user) {
     path = "admin";
@@ -16,7 +23,7 @@ const DefaultRoute = ({ user }) => {
   return <Redirect to={path} />;
 };
 
-const mapStateToProps: InitialStateAuthUserType = ({ authStore }) => ({
+const mapStateToProps: AppDispatchType = ({ authStore }) => ({
   ...authStore
 });
 
