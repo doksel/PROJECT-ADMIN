@@ -7,18 +7,20 @@ import Footer from "../../layout/Footer";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 import Main from "../Main";
-import Profile from "../Account/Profile";
-import Form from "../Account/Form";
+import User from "../User";
+import Account from "../Account";
 
-const Admin: React.FC = () => {
+const Admin: React.FC = () => {  
   return (
     <>
       <Header />
       <Breadcrumbs crumbs={[]} />
 
       <Content>
-        <Route path="/admin/account/profile" exact render={() => <Profile />} />
-        <Route path="/admin/account/form" exact render={() => <Form />} />
+        {/* <Route path="/admin/account/:action?" exact render={() => <Account />} /> */}
+        <Route path="/admin/account/profile" exact component={Account.review} />
+        <Route path="/admin/account/form" exact component={Account.edit} />
+        <Route path="/admin/user/:action?/:id?" exact render={() => <User />} />
         <Route path="/admin" exact render={() => <Main />} />
       </Content>
 

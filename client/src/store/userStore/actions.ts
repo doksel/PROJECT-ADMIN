@@ -24,7 +24,7 @@ export const getUsers = () => ({
   }
 });
 
-export const getUserById = (id: number) => ({
+export const getUserById = (id: string) => ({
   type: "API",
   payload: {
     query: {

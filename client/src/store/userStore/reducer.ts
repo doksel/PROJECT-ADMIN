@@ -1,7 +1,10 @@
 import {
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS,
-  GET_USERS_FAIL
+  GET_USERS_FAIL,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAIL
 } from "./actions";
 
 type ErrorsType = {
@@ -22,7 +25,8 @@ const initialState = {
   isLoading: false,
   error: false,
   errors: null as ErrorsType | null,
-  message: ""
+  message: "",
+  user: null as UserType | null
 };
 
 export type InitialStateType = typeof initialState;
@@ -60,6 +64,31 @@ export default (
         message: payload.message,
         isLoading: false
       };
+
+    case GET_USER_REQUEST:
+      return {
+        ...state,
+        error: false,
+        errors: null,
+        isLoading: true
+      };
+
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        user: payload.user
+      };
+
+    case GET_USER_FAIL:
+      return {
+        ...state,
+        error: true,
+        errors: payload.errors,
+        message: payload.message,
+        isLoading: false
+      };
+
     default:
       return state;
   }

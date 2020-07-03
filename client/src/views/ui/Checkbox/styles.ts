@@ -1,9 +1,9 @@
-@import "../../../styles/theme.less";
+import styled from "styled-components";
 
-.wrap_checkbox {
+export const WrapCheckbox = styled.div`
   display: flex;
 
-  .checkbox + label {
+  input + label {
     cursor: pointer;
     position: relative;
     color: #6d727c;
@@ -14,7 +14,7 @@
     height: 15px;
   }
 
-  .checkbox + label:before {
+  input + label:before {
     display: block !important;
     content: "";
     position: absolute;
@@ -32,7 +32,7 @@
     transition: 0.2s ease-in-out;
   }
 
-  .checkbox + label:after {
+  input + label:after {
     display: block !important;
     content: "";
     width: 15px;
@@ -47,29 +47,29 @@
     border-radius: 2px;
   }
 
-  .checkbox:checked + label:before {
+  input:checked + label:before {
     opacity: 1;
     transition: 0.2s ease-in-out;
   }
 
-  .checkbox:checked + label:after {
+  input:checked + label:after {
     background: @blue-color;
     border: 2px solid @blue-color;
   }
 
-  .checkbox:disabled + label:after {
+  input:disabled + label:after {
     border: 2px solid #c4c4c4;
     background: #c4c4c4 !important;
   }
 
-  .checkbox:disabled:checked + label:after {
+  input:disabled:checked + label:after {
     border: 2px solid #666;
     background: #666 !important;
   }
 
-  .checkbox:focus + label:after {
+  input:focus + label:after {
     border: 2px solid #4085bf !important;
     outline: 2px dotted #6f777b !important;
     outline-offset: 3px;
   }
-}
+`;

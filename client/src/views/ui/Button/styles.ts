@@ -9,6 +9,7 @@ export const WrapButton = styled.div<ButtonType>`
 
   button {
     width: 100%;
+    max-width: max-content;
     padding: 10px;
     border-radius: 4px;
     margin: 10px 0;
@@ -21,7 +22,7 @@ export const WrapButton = styled.div<ButtonType>`
         : props.type === "danger"
         ? props.theme.colors.error
         : "#fff"};
-    border: ${props =>
+    border: 1px solid ${props =>
       props.type === "primary"
         ? props.theme.colors.primary
         : props.type === "success"
@@ -41,7 +42,7 @@ export const WrapButton = styled.div<ButtonType>`
           ? props.theme.colors.error_hover
           : "#fff"};
       padding: 10px;
-      border: ${props =>
+      border: 1px solid ${props =>
         props.type === "primary"
           ? props.theme.colors.primary_hover
           : props.type === "success"

@@ -1,5 +1,6 @@
+import {MouseEvent} from "react";
 export type ActionTableType = {
-  canView?: () => void;
-  canEdit?: () => void;
-  canDelete?: () => void;
+  onView?: (id: MouseEvent) => void;
+  onEdit?: (id: MouseEvent) => void;
+  onDelete?: (id: MouseEvent) => void;
 };

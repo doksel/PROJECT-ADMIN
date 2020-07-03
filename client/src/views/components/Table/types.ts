@@ -27,9 +27,9 @@ export type TableType = {
 };
 
 export type TablePropsType = {
-  canView?: () => void;
-  canEdit?: () => void;
-  canDelete?: () => void;
+  onView?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
 };
 
 export type RowDataType = {
@@ -37,4 +37,5 @@ export type RowDataType = {
   lastName: string;
   email: string;
   avatar: any;
+  id?: string;
 };

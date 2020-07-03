@@ -12,9 +12,9 @@ const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
   title,
   columns,
   data,
-  canView,
-  canEdit,
-  canDelete
+  onView,
+  onEdit,
+  onDelete
 }) => {
   return (
     <WrapTable>
@@ -39,13 +39,15 @@ const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
             {
               title: "Actions",
               tooltip: "Actions",
-              render: rowData => (
-                <TableAction
-                  canView={canView}
-                  canEdit={canEdit}
-                  canDelete={canDelete}
-                />
-              )
+              render: (rowData: any)=>{
+                  return (
+                    <TableAction
+                      onView={()=>onView && onView(rowData && rowData._id)}
+                      onEdit={()=>onEdit && onEdit(rowData && rowData._id)}
+                      onDelete={()=>onDelete && onDelete(rowData && rowData._id)}
+                    />
+                  )}
+              
             }
           ]}
           data={data}

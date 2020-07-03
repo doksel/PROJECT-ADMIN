@@ -12,8 +12,6 @@ type PropsType = {
 const DefaultRoute: React.FC<RouteProps & PropsType> = ({ user }) => {
   let path;
 
-  console.log(user);
-
   if (user) {
     path = "admin";
   } else {

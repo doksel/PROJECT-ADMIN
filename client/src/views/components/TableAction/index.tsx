@@ -6,25 +6,25 @@ import { theme } from "../../../styles/theme";
 import { WrapTableAction } from "./styles";
 
 const TableAction: React.FC<ActionTableType> = ({
-  canView,
-  canEdit,
-  canDelete
+  onView,
+  onEdit,
+  onDelete
 }) => {
   return (
     <WrapTableAction>
-      {!!canView && (
-        <Visibility style={{ color: theme.colors.primary }} onClick={canView} />
+      {!!onView && (
+        <Visibility style={{ color: theme.colors.primary }} onClick={onView} />
       )}
-      {!!canEdit && (
+      {!!onEdit && (
         <EditOutlined
           style={{ color: theme.colors.primary }}
-          onClick={canEdit}
+          onClick={onEdit}
         />
       )}
-      {!!canDelete && (
+      {!!onDelete && (
         <DeleteForever
           style={{ color: theme.colors.red }}
-          onClick={canDelete}
+          onClick={onDelete}
         />
       )}
     </WrapTableAction>

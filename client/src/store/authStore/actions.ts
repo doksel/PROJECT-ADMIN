@@ -15,9 +15,9 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL";
 
-export const GET_USER_REQUEST = "GET_USER_REQUEST";
-export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
-export const GET_USER_FAIL = "GET_USER_FAIL";
+export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
+export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
+export const GET_PROFILE_FAIL = "GET_PROFILE_FAIL";
 
 export const USER_LOGOUT = "USER_LOGOUT";
 
@@ -92,6 +92,6 @@ export const me = (): SagaWatchType => ({
       urlParams: `/users/account`
     },
     variables: null,
-    actions: [GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAIL]
+    actions: [GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, GET_PROFILE_FAIL]
   }
 });

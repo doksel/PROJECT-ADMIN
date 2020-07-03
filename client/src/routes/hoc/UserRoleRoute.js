@@ -6,14 +6,13 @@ const UserRoleRoute = ({
   component: Component,
   user,
   userRole,
-  resources,
   ...rest
 }) => (
   <Route
     {...rest}
     render={props => {
       if (user && user.role === userRole) {
-        return <Component {...props} resources={resources} />;
+        return <Component {...props} />;
       }
 
       return <Redirect to="/" />;

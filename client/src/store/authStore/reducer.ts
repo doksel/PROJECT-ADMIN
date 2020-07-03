@@ -9,9 +9,9 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
   RESET_FORM,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAIL,
+  GET_PROFILE_REQUEST,
+  GET_PROFILE_SUCCESS,
+  GET_PROFILE_FAIL,
   USER_LOGOUT
 } from "./actions";
 
@@ -27,6 +27,7 @@ export type UserType = {
   lastName: string;
   email: string;
   avatar: string;
+  role?: string;
 };
 
 const initialState = {
@@ -141,7 +142,7 @@ export default (
         isLoading: false
       };
 
-    case GET_USER_REQUEST:
+    case GET_PROFILE_REQUEST:
       return {
         ...state,
         error: false,
@@ -149,14 +150,14 @@ export default (
         isLoading: true
       };
 
-    case GET_USER_SUCCESS:
+    case GET_PROFILE_SUCCESS:
       return {
         ...state,
         isLoading: false,
         user: payload.user
       };
 
-    case GET_USER_FAIL:
+    case GET_PROFILE_FAIL:
       localStorage.removeItem("token");
 
       return {

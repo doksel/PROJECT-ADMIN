@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 import Table from "../../components/Table";
+import MainLoader from "../../components/MainLoader";
 
 import { getUsers } from "../../../store/userStore/actions";
 
@@ -24,14 +25,14 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, []);  
 
   return (
     <>
       <MainTitle>Main page</MainTitle>
 
       {isLoading ? (
-        <div>Loading.....</div>
+        <MainLoader />
       ) : (
         <Table
           columns={[
@@ -40,9 +41,9 @@ const Main: React.FC = () => {
             { title: "email", field: "email" }
           ]}
           data={usersList}
-          canView={() => console.log("canView")}
-          canEdit={() => console.log("canEdit")}
-          canDelete={() => console.log("canDelete")}
+          onView={id => history.push(`/admin/user/profile/${id}`)}
+          onEdit={id => history.push(`/admin/user/form/${id}`)}
+          onDelete={id => history.push(`/admin/user/profile/${id}`)}
         />
       )}
     </>

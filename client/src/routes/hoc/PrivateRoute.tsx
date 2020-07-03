@@ -18,8 +18,6 @@ const PrivateRoute: React.FC<RouteProps & PropsType> = ({
   <Route
     {...rest}
     render={props => {
-      console.log(user);
-
       if (user) {
         return <Component {...props} />;
       }

@@ -1,25 +1,23 @@
-import React from "react";
-import { Route } from "react-router-dom";
+// import React from "react";
+// import { Route } from "react-router-dom";
 
-import Header from "../../layout/Header";
-import Content from "../../layout/Content";
-import Footer from "../../layout/Footer";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import Profile from "./Profile";
-import Form from "./Form";
+// import Profile from "./Profile";
+// import Form from "./Form";
 
-const Account: React.FC = () => (
-  <>
-    <Header />
-    <Breadcrumbs crumbs={[]} />
+// const Account: React.FC = () => (
+//   <>
+//     <Route path="/admin/account/profile" exact render={() => <Profile />} />
+//     <Route path="/admin/account/form" exact render={() => <Form />} />
+//   </>
+// );
 
-    <Content>
-      {/* <Route path="/account/profile" exact render={() => <Profile />} />
-      <Route path="/account/form" exact render={() => <Form />} /> */}
-    </Content>
+// export default Account;
 
-    <Footer />
-  </>
-);
+import { loadable } from "../../../services/loadable";
 
-export default Account;
+export default {
+  create: loadable(() => import("./Form")),
+  review: loadable(() => import("./Profile"), { review: true }),
+  edit: loadable(() => import("./Form"), { edit: true }),
+  name: "account",
+};

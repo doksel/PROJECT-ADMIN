@@ -27,7 +27,7 @@ export type TableType = {
 };
 
 export type TablePropsType = {
-  canView?: boolean;
-  canEdit?: boolean;
-  canDelete?: boolean;
+  onView?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
 };

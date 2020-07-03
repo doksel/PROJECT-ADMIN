@@ -17,4 +17,5 @@ schema.method('transform', function() {
   return obj;
 });
 
+
 export default model("User", schema);
