@@ -27,5 +27,9 @@ export const WrapForm = styled.div`
     h1 {
       text-align: center;
     }
+
+    button {
+      max-width: 100%;
+    }
   }
 `;

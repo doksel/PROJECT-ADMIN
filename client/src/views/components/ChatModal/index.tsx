@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { Save, Close, Person } from "@material-ui/icons";
+import socket from "../../../helpers/socket";
 
 import { 
     WrapChatModal, 
@@ -16,27 +18,37 @@ import {
     Textarea
 } from "./styles";
 
+
+type RootState = {
+    chatStore: any;
+};
+
 const Chat: React.FC = () => {
-    const onCancel = () => {
-        console.log("onCancel");
-    }
+    const [value, setValue] = useState<string>('')
+    const dispatch = useDispatch();
+    const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+    const isActive = useTypedSelector(state => state.chatStore.isActive);
 
     const onSave = () => {
-        console.log("onSave");
+        console.log(value);
+        
+        socket.emit('chat message', value)
+        dispatch({ type: 'SHOW_CHAT', payload: {isActive: false} })
+        setValue('')
     }
 
     const data = [
-        {userName: "Vlad", comment: "comment 1"},
-        {userName: "Name", comment: "comment 2"},
-        {userName: "Vasia", comment: "comment 3"}
+        {userName: "Vlad", message: "message 1"},
+        {userName: "Name", message: "message 2"},
+        {userName: "Vasia", message: "message 3"}
     ]
 
   return (
-    <WrapChatModal>
+    <WrapChatModal active={isActive}>
       <ChatModal>
         <Title>
             <div>Chat</div> 
-            <Close onClick={onCancel}/>
+            <Close onClick={()=>dispatch({ type: 'SHOW_CHAT', payload: {isActive: false} })}/>
         </Title>
 
         <WrapContent>
@@ -49,8 +61,7 @@ const Chat: React.FC = () => {
 
                     <MessageBody>
                         <NameUser>{message.userName}</NameUser>
-
-                        <MessageText>{message.comment}</MessageText>
+                        <MessageText>{message.message}</MessageText>
                     </MessageBody>
                     </Message>
                 ))}
@@ -58,7 +69,7 @@ const Chat: React.FC = () => {
             </Content>
         </WrapContent>
         
-        <Textarea name="text" placeholder="Enter your comment..." />
+        <Textarea name="message" placeholder="Enter your message..." value={value} onChange={(e)=>setValue(e.target.value)}/>
 
         <WrapButton>
             <Save onClick={onSave}/>

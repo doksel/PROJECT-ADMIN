@@ -3,12 +3,13 @@ import styled from "styled-components";
 type ChatPropsType = {
   color?: string;
   loading?: boolean;
+  active: boolean;
 };
 
-export const WrapChatModal = styled.div`
+export const WrapChatModal = styled.div<ChatPropsType>`
   width: 100vw;
   height: 100vh;
-  display: flex;
+  display: ${props =>  props.active ? "flex" : "none"};
   align-items: center;
   justify-content: center;
   position: fixed;

@@ -26,13 +26,18 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);  
+  }, []);
+
+  const handleClick = () => {
+    dispatch({ type: 'SHOW_CHAT', payload: {isActive: true} })
+  }
 
   return (
     <>
       <WrapMainTitle>
         <MainTitle>Main page</MainTitle>
-        <ChatButton onClick={()=>{}}>
+        
+        <ChatButton onClick={handleClick}>
           <ChatIcon/>
         </ChatButton>
       </WrapMainTitle>
