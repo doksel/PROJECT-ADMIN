@@ -4,10 +4,11 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 import Table from "../../components/Table";
 import MainLoader from "../../components/MainLoader";
+import ChatIcon from '@material-ui/icons/Chat';
 
 import { getUsers } from "../../../store/userStore/actions";
 
-import { MainTitle } from "./styles";
+import { WrapMainTitle, MainTitle, ChatButton } from "./styles";
 
 type RootState = {
   userStore: any;
@@ -29,7 +30,12 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <MainTitle>Main page</MainTitle>
+      <WrapMainTitle>
+        <MainTitle>Main page</MainTitle>
+        <ChatButton onClick={()=>{}}>
+          <ChatIcon/>
+        </ChatButton>
+      </WrapMainTitle>
 
       {isLoading ? (
         <MainLoader />

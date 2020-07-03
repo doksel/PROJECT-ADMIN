@@ -14,6 +14,7 @@ import { me } from "../store/authStore/actions";
 import { UserType } from "../store/authStore/reducer";
 import { AppDispatchType } from "../store/store";
 import { ActionType } from "../store/saga";
+import ChatModal from "../views/components/ChatModal";
 
 type PropsType = {
   me: ActionType;
@@ -75,6 +76,8 @@ const App: React.FC<PropsType> = ({ me, user, userId, isLoading }) => {
           )}
         </Switch>
       </div>
+
+      <ChatModal/>
     </>
   );
 };
