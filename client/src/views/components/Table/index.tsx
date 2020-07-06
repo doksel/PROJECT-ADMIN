@@ -3,7 +3,6 @@ import { MaterialTableProps } from "material-table";
 
 import TableUI from "../../ui/Table";
 import TableAction from "../TableAction";
-import ManIcon from "../../../images/icons/man.svg";
 
 import { TablePropsType } from "./types";
 import { WrapTable } from "./styles";
@@ -21,20 +20,6 @@ const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
       {data && (
         <TableUI
           columns={[
-            {
-              field: "avatar",
-              title: "Avatar",
-              tooltip: "Avatar",
-              render: (rowData: any) =>
-                rowData.avatar && rowData.avatar.length ? (
-                  <img src={""} style={{ width: 50, borderRadius: "50%" }} />
-                ) : (
-                  <img
-                    src={ManIcon}
-                    style={{ width: 40, borderRadius: "50%" }}
-                  />
-                )
-            },
             ...columns,
             {
               title: "Actions",

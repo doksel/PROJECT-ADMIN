@@ -19,7 +19,7 @@ const Profile: React.FC = () => {
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
   const isLoading = useTypedSelector(state => state.authStore.isLoading);
   const user = useTypedSelector(state => state.authStore.user);
-
+  
   return (
     <>
       {isLoading ? (
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
           <div>LastName: {user.lastName}</div>
           <div>Email: {user.email}</div>
           <Icon onClick={() => history.push("form")} icon={EditIcon} />
-          <Button text="Create article" onClick={()=>{}}/>
+          <Button text="Create article" onClick={()=>history.push("/admin/categories")}/>
         </>
       )}
     </>

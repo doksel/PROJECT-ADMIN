@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import ChatIcon from '@material-ui/icons/Chat';
 
 import Table from "../../components/Table";
 import MainLoader from "../../components/MainLoader";
-import ChatIcon from '@material-ui/icons/Chat';
+import ManIcon from "../../../images/icons/man.svg";
+
 
 import { getUsers } from "../../../store/userStore/actions";
 import { openChat, getChat } from "../../../store/chatStore/actions";
@@ -37,6 +39,26 @@ const Main: React.FC = () => {
     dispatch({ type: 'SHOW_CHAT', payload: {isActive: true} })
   }
 
+  const columns = [
+    {
+      field: "avatar",
+      title: "Avatar",
+      tooltip: "Avatar",
+      render: (rowData: any) =>
+        rowData.avatar && rowData.avatar.length ? (
+          <img src={""} style={{ width: 50, borderRadius: "50%" }} />
+        ) : (
+          <img
+            src={ManIcon}
+            style={{ width: 40, borderRadius: "50%" }}
+          />
+        )
+    },
+    { title: "firstName", field: "firstName" },
+    { title: "lastName", field: "lastName" },
+    { title: "email", field: "email" }
+  ]
+
   return (
     <>
       <WrapMainTitle>
@@ -51,11 +73,7 @@ const Main: React.FC = () => {
         <MainLoader />
       ) : (
         <Table
-          columns={[
-            { title: "firstName", field: "firstName" },
-            { title: "lastName", field: "lastName" },
-            { title: "email", field: "email" }
-          ]}
+          columns={columns}
           data={usersList}
           onView={id => history.push(`/admin/user/profile/${id}`)}
           onEdit={id => history.push(`/admin/user/form/${id}`)}

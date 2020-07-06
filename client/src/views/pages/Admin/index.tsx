@@ -9,6 +9,7 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import Main from "../Main";
 import User from "../User";
 import Account from "../Account";
+import Categories from "../Categories";
 
 const Admin: React.FC = () => {  
   return (
@@ -17,11 +18,11 @@ const Admin: React.FC = () => {
       <Breadcrumbs crumbs={[]} />
 
       <Content>
-        {/* <Route path="/admin/account/:action?" exact render={() => <Account />} /> */}
+        <Route path="/admin" exact render={() => <Main />} />
         <Route path="/admin/account/profile" exact component={Account.review} />
         <Route path="/admin/account/form" exact component={Account.edit} />
         <Route path="/admin/user/:action?/:id?" exact render={() => <User />} />
-        <Route path="/admin" exact render={() => <Main />} />
+        <Route path="/admin/categories" exact render={() => <Categories />} />
       </Content>
 
       <Footer />
