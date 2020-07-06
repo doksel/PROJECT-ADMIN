@@ -4,7 +4,10 @@ import {
   SEND_TO_CHAT_FAIL,
   GET_CHAT_REQUEST,
   GET_CHAT_SUCCESS,
-  GET_CHAT_FAIL
+  GET_CHAT_FAIL,
+  OPEN_CHAT_REQUEST,
+  OPEN_CHAT_SUCCESS,
+  OPEN_CHAT_FAIL
 } from "./actions";
 
 type ErrorsType = {

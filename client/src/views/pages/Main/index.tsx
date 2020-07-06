@@ -7,11 +7,13 @@ import MainLoader from "../../components/MainLoader";
 import ChatIcon from '@material-ui/icons/Chat';
 
 import { getUsers } from "../../../store/userStore/actions";
+import { openChat, getChat } from "../../../store/chatStore/actions";
 
 import { WrapMainTitle, MainTitle, ChatButton } from "./styles";
 
 type RootState = {
   userStore: any;
+  authStore: any;
 };
 
 const Main: React.FC = () => {
@@ -23,12 +25,15 @@ const Main: React.FC = () => {
   const message = useTypedSelector(state => state.userStore.message);
   const error = useTypedSelector(state => state.userStore.error);
   const usersList = useTypedSelector(state => state.userStore.users);
+  const profile = useTypedSelector(state => state.authStore.user);
 
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
   const handleClick = () => {
+    dispatch(openChat(profile && {id: profile._id, lastName: profile.lastName}));
+    dispatch(getChat());
     dispatch({ type: 'SHOW_CHAT', payload: {isActive: true} })
   }
 

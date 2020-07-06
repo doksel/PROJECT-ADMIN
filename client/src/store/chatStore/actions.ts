@@ -8,6 +8,31 @@ export const SEND_TO_CHAT_REQUEST = "SEND_TO_CHAT_REQUEST";
 export const SEND_TO_CHAT_SUCCESS = "SEND_TO_CHAT_SUCCESS";
 export const SEND_TO_CHAT_FAIL = "SEND_TO_CHAT_FAIL";
 
+export const OPEN_CHAT_REQUEST = "OPEN_CHAT_REQUEST";
+export const OPEN_CHAT_SUCCESS = "OPEN_CHAT_SUCCESS";
+export const OPEN_CHAT_FAIL = "OPEN_CHAT_FAIL";
+
+type ChatType = {
+  id: string,
+  lastName: string
+}
+
+export const openChat = (payload: ChatType): SagaWatchType => ({
+  type: "API",
+  payload: {
+    query: {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      urlParams: `/chat`
+    },
+    variables: payload,
+    actions: [OPEN_CHAT_REQUEST, OPEN_CHAT_SUCCESS, OPEN_CHAT_FAIL]
+  }
+});
+
 export const getChat = (): SagaWatchType => ({
   type: "API",
   payload: {
@@ -33,9 +58,9 @@ export const sendToChat = (message: string): SagaWatchType => ({
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      urlParams: `/chat`
+      urlParams: `/chat/message`
     },
-    variables: message,
+    variables: {message},
     actions: [SEND_TO_CHAT_REQUEST, SEND_TO_CHAT_SUCCESS, SEND_TO_CHAT_FAIL]
   }
 });
