@@ -1,9 +1,7 @@
 import {Schema, model, Types} from "mongoose";
 
 const schema = new Schema ({
-  message: {type: String, required: true},
-  lastName: {type: String, required: true},
-  ownerId: [{type: Types.ObjectId, ref: "User"}]  
+  name: {type: String, required: true}  
 }, {timestamps: true})
  
 schema.method('transform', function() {
@@ -16,4 +14,4 @@ schema.method('transform', function() {
 });
 
 
-export default model("Chat", schema);
+export default model("Categories", schema);

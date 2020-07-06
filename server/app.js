@@ -17,11 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 
-// app.use(`/auth`, routers.auth);
 app.use(path.join(process.env.API_BASE,'/auth'),  routers.auth);
-// app.use(`/users`, routers.users);
 app.use(path.join(process.env.API_BASE,'/users'),  routers.users);
-// app.use(`/chat`, routers.chat);
+app.use(path.join(process.env.API_BASE,'/categories'),  routers.categories);
 app.use(path.join(process.env.API_BASE,'/chat'),  routers.chat);
 
 io.on('connection', (socket) => {
