@@ -11,6 +11,7 @@ const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
   title,
   columns,
   data,
+  actions,
   onView,
   onEdit,
   onDelete
@@ -37,6 +38,7 @@ const Table: React.FC<MaterialTableProps<{}> & TablePropsType> = ({
           ]}
           data={data}
           title={title}
+          actions={actions}
         />
       )}
     </WrapTable>

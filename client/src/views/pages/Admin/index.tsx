@@ -22,7 +22,7 @@ const Admin: React.FC = () => {
         <Route path="/admin/account/profile" exact component={Account.review} />
         <Route path="/admin/account/form" exact component={Account.edit} />
         <Route path="/admin/user/:action?/:id?" exact render={() => <User />} />
-        <Route path="/admin/categories" exact render={() => <Categories />} />
+        <Route path="/admin/categories/:id?" exact render={() => <Categories />} />
       </Content>
 
       <Footer />

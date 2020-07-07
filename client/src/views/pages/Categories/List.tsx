@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Table from "../../components/Table";
 import MainLoader from "../../components/MainLoader";
 import Icon from "../../common/Icon";
-import EditIcon from "../../../images/icons/edit-tools.svg";
+import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
 import { getCategories } from "../../../store/categoryStore/actions";
@@ -33,6 +33,7 @@ const List: React.FC = () => {
         <MainLoader />
       ) : (
         <Table
+          title="Categories"
           columns={[
             { title: "Name", field: "name" },
             { title: "Create", field: "createAt" },
@@ -41,7 +42,15 @@ const List: React.FC = () => {
           data={categories}
           onView={id => history.push(`/admin/categories/${id}`)}
           onEdit={id => history.push(`/admin/categories/${id}`)}
-          onDelete={id => history.push(`/admin/categories/profile/${id}`)}
+          onDelete={id => history.push(`/admin/categories/delete/${id}`)}
+          actions={[
+            {
+              icon: ()=><Icon onClick={() => history.push("form")} icon={AddIcon} />,
+              tooltip: 'Add Category',
+              isFreeAction: true,
+              onClick: () => history.push(`/admin/categories/create`)
+            }
+          ]}
         />
       )}
     </>

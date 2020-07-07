@@ -73,6 +73,7 @@ const Main: React.FC = () => {
         <MainLoader />
       ) : (
         <Table
+          title="Users"
           columns={columns}
           data={usersList}
           onView={id => history.push(`/admin/user/profile/${id}`)}
