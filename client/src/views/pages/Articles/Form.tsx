@@ -12,7 +12,7 @@ import {
   getCategoryById,
   createCategory,
 } from "../../../store/categoryStore/actions";
-import { CategoryType } from "../../../store/categoryStore/reducer";
+import { ArticleType } from "../../../store/articleStore/reducer";
 
 type RootStateType = {
   categoryStore: any;
@@ -23,7 +23,7 @@ type ParamsType = {
   type: string;
 };
 
-const Form: React.FC<InjectedFormProps<CategoryType>> = ({
+const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   handleSubmit,
   reset,
 }) => {
@@ -45,7 +45,7 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
     e.preventDefault();
     const typeParams = params.type
 
-    handleSubmit((values: CategoryType) => {
+    handleSubmit((values: ArticleType) => {
       if(typeParams === "create")dispatch(createCategory(values));
       if(typeParams === "edit")dispatch(createCategory(values));
       
@@ -59,14 +59,23 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
 
   return (
     <>
-      <h1>Category</h1>
+      <h1>Article</h1>
       <form onSubmit={formSubmit}>
         <Field
-          name="name"
+          name="title"
           component={Input}
           defaultValue={category && category.name}
-          label="Category's name"
-          placeholder="Enter name of category"
+          label="Article's name"
+          placeholder="Enter name of articles"
+          validate={[required]}
+        />
+
+        <Field
+          name="description"
+          component={Input}
+          defaultValue={category && category.name}
+          label="Article's description"
+          placeholder="Enter description of articles"
           validate={[required]}
         />
 
@@ -81,7 +90,7 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   );
 };
 
-export default reduxForm<CategoryType>({
+export default reduxForm<ArticleType>({
   form: "create",
   enableReinitialize: true,
 })(Form);

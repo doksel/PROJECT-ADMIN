@@ -7,7 +7,7 @@ import Form from "./Form";
 const Categories: React.FC = () => (
   <>
     <Route path="/admin/categories" exact render={() => <List />} />
-    <Route path="/admin/categories/:id" exact render={() => <Form />} />
+    <Route path="/admin/categories/:id/:type?" exact render={() => <Form />} />
   </>
 );
 

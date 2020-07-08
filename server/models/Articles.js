@@ -3,7 +3,7 @@ import {Schema, model, Types} from "mongoose";
 const schema = new Schema ({
   title: {type: String, required: true},
   description: {type: String, required: true},
-  ownerId: {type: String, ref: "User"},
+  owner: {type: Object, ref: "User"},
 }, {timestamps: true})
  
 schema.method('transform', function() {
