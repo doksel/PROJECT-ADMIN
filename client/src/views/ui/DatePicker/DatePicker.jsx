@@ -25,7 +25,7 @@ const DatePickerUI = ({
 }) => (
   <DatePicker
     className={cm(s.datePicker, {
-      [s.error]: touched && error
+      [s.error]: touched && error,
     })}
     name={name}
     timeFormat={false}

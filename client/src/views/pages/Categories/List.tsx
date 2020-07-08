@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 import Table from "../../components/Table";
 import MainLoader from "../../components/MainLoader";
@@ -20,12 +20,14 @@ const List: React.FC = () => {
 
   const dispatch: AppDispatchType = useDispatch();
   const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
-  const isLoading = useTypedSelector(state => state.categoryStore.isLoading);
-  const categories = useTypedSelector(state => state.categoryStore.categories);
+  const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
+  const categories = useTypedSelector(
+    (state) => state.categoryStore.categories
+  );
 
-  useEffect(()=>{
-    dispatch(getCategories())
-  },[])
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <>
@@ -37,19 +39,21 @@ const List: React.FC = () => {
           columns={[
             { title: "Name", field: "name" },
             { title: "Create", field: "createAt" },
-            { title: "Owner", field: "ownerId" }
+            { title: "Owner", field: "ownerId" },
           ]}
           data={categories}
-          onView={id => history.push(`/admin/categories/${id}`)}
-          onEdit={id => history.push(`/admin/categories/${id}`)}
-          onDelete={id => history.push(`/admin/categories/delete/${id}`)}
+          onView={(id) => history.push(`/admin/categories/${id}`)}
+          onEdit={(id) => history.push(`/admin/categories/${id}`)}
+          onDelete={(id) => history.push(`/admin/categories/delete/${id}`)}
           actions={[
             {
-              icon: ()=><Icon onClick={() => history.push("form")} icon={AddIcon} />,
-              tooltip: 'Add Category',
+              icon: () => (
+                <Icon onClick={() => history.push("form")} icon={AddIcon} />
+              ),
+              tooltip: "Add Category",
               isFreeAction: true,
-              onClick: () => history.push(`/admin/categories/create`)
-            }
+              onClick: () => history.push(`/admin/categories/create`),
+            },
           ]}
         />
       )}

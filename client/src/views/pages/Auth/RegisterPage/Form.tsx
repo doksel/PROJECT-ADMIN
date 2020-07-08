@@ -9,7 +9,7 @@ import {
   required,
   email,
   hardpassword,
-  checkPasswords
+  checkPasswords,
 } from "../../../../helpers/validate";
 
 type CustomPropsType = {
@@ -23,7 +23,7 @@ const Form: React.FC<{} & CustomPropsType> = ({
   loading,
   onSubmit,
   message,
-  error
+  error,
 }) => {
   return (
     <form onSubmit={onSubmit} autoComplete="off">

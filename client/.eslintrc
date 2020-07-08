@@ -6,7 +6,7 @@
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
     "react/jsx-filename-extension": [
       1,
-      { "extensions": [".js", ".jsx", ".tsx"] }
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
     "import/no-extraneous-dependencies": 0,
     "flowtype/no-types-missing-file-annotation": 0,

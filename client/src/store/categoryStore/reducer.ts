@@ -2,14 +2,12 @@ import {
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
   GET_CATEGORIES_FAIL,
-
   GET_CATEGORY_REQUEST,
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAIL,
-    
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,
-  CREATE_CATEGORY_FAIL
+  CREATE_CATEGORY_FAIL,
 } from "./actions";
 
 type ErrorsType = {
@@ -21,7 +19,7 @@ type ErrorsType = {
 
 export type CategoryType = {
   name: string;
-}
+};
 
 const initialState = {
   categories: null as Array<CategoryType> | null,
@@ -29,7 +27,7 @@ const initialState = {
   error: false as boolean | false,
   errors: null as ErrorsType | null,
   message: "" as string | "",
-  category: null as CategoryType | null
+  category: null as CategoryType | null,
 };
 
 export type InitialStateType = typeof initialState;
@@ -49,14 +47,14 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true
+        isLoading: true,
       };
 
     case GET_CATEGORIES_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        categories: payload.categories
+        categories: payload.categories,
       };
 
     case GET_CATEGORIES_FAIL:
@@ -65,7 +63,7 @@ export default (
         error: true,
         errors: payload.errors,
         message: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case GET_CATEGORY_REQUEST:
@@ -73,14 +71,14 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true
+        isLoading: true,
       };
 
     case GET_CATEGORY_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        category: payload.category
+        category: payload.category,
       };
 
     case GET_CATEGORY_FAIL:
@@ -89,7 +87,7 @@ export default (
         error: true,
         errors: payload.errors,
         message: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case CREATE_CATEGORY_REQUEST:
@@ -97,14 +95,14 @@ export default (
         ...state,
         error: false,
         errors: null,
-        isLoading: true
+        isLoading: true,
       };
 
     case CREATE_CATEGORY_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        category: payload.category
+        category: payload.category,
       };
 
     case CREATE_CATEGORY_FAIL:
@@ -113,7 +111,7 @@ export default (
         error: true,
         errors: payload.errors,
         message: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     default:

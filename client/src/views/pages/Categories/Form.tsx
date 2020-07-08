@@ -1,9 +1,18 @@
-import React, {useEffect} from "react";
+import React, { useEffect, FormEvent } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { Field, reduxForm, InjectedFormProps } from "redux-form";
 
+import Button from "../../common/Button";
+import Input from "../../common/Input";
+
+import { required } from "../../../helpers/validate";
 import { AppDispatchType } from "../../../store/store";
-import { getCategoryById } from "../../../store/categoryStore/actions";
+import {
+  getCategoryById,
+  createCategory,
+} from "../../../store/categoryStore/actions";
+import { CategoryType } from "../../../store/categoryStore/reducer";
 
 type RootStateType = {
   categoryStore: any;
@@ -13,34 +22,60 @@ type ParamsType = {
   id: string;
 };
 
-const Form: React.FC = () =>{ 
+const Form: React.FC<InjectedFormProps<CategoryType>> = ({
+  handleSubmit,
+  reset,
+}) => {
   let history = useHistory();
   let params = useParams<ParamsType>();
 
   const dispatch: AppDispatchType = useDispatch();
   const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
-  const isLoading = useTypedSelector(state => state.categoryStore.isLoading);
-  const category = useTypedSelector(state => state.categoryStore.category);
+  const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
+  const category = useTypedSelector((state) => state.categoryStore.category);
 
-  console.log(params);
-  
-  useEffect(()=>{
-    if(params.id !== "create"){
-      dispatch(getCategoryById(params.id))
+  useEffect(() => {
+    if (params.id !== "create") {
+      dispatch(getCategoryById(params.id));
     }
-  },[])
+  }, []);
 
-  const handleSave = () => {
+  const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-  }
+    handleSubmit((values: CategoryType) => {
+      dispatch(createCategory(values));
+    })();
+
+    history.push("/admin/categories");
+    reset();
+  };
 
   return (
     <>
       <h1>Category</h1>
-      <form onSubmit={handleSave}>
-        
+      <form onSubmit={formSubmit}>
+        <Field
+          name="name"
+          component={Input}
+          defaultValue={category && category.name}
+          label="Category's name"
+          placeholder="Enter name of category"
+          validate={[required]}
+        />
+
+        <Button
+          htmlType="submit"
+          type="primary"
+          loading={isLoading}
+          text="Enter"
+        />
       </form>
     </>
-  )};
+  );
+};
 
-export default Form;
+export default reduxForm<CategoryType>({
+  form: "create",
+  enableReinitialize: true,
+})(Form);

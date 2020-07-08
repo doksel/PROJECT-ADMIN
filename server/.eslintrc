@@ -4,7 +4,7 @@
   "rules": {
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "import/no-extraneous-dependencies": 0,
     "flowtype/no-types-missing-file-annotation": 0,
     "react/react-in-jsx-scope": 0,
