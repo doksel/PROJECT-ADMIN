@@ -36,15 +36,15 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/:id", async (req, res) => {
+
   try {
-    const id = req.params.id;
-    const { name } = req.body.name;
+    const { id } = req.params;
+    const { name } = req.body;
 
     const category = await Categories.findOneAndUpdate(
-      { id },
-      { name },
-      { new: true }
+       {_id: id },
+       { name }
     );
 
     res.status(201).json({ category });

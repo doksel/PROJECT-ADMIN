@@ -1,4 +1,4 @@
-import React, { FormEvent, ChangeEvent } from "react";
+import React, { FormEvent, ChangeEvent, useEffect } from "react";
 import {
   WrappedFieldInputProps,
   WrappedFieldMetaProps
@@ -41,13 +41,15 @@ const Input: React.FC<InputTypes & CustomInputTypes> = ({
   maxLength,
   mask
 }) => {
-  if (initValue && !input.value) {
-    input.onChange(initValue);
-  }
-
-  if (defaultValue) {
-    input.onChange(defaultValue);
-  }
+  useEffect(()=>{
+    if (initValue && !input.value) {
+      input.onChange(initValue);
+    }
+  
+    if (defaultValue) {
+      input.onChange(defaultValue);
+    }
+  },[defaultValue, initValue])
 
   return (
     <WrapInput labelTransform="capitalize">

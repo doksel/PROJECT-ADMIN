@@ -77,7 +77,10 @@ export const createCategory = (payload: CategoryType) => ({
   },
 });
 
-export const editCategory = (id: string) => ({
+export const editCategory = (id: string, payload: CategoryType) => {
+  console.log(id,payload);
+  
+  return({
   type: "API",
   payload: {
     query: {
@@ -87,16 +90,16 @@ export const editCategory = (id: string) => ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      urlParams: `/categories`,
+      urlParams: `/categories/${id}`,
     },
-    variables: id,
+    variables: payload,
     actions: [
       CREATE_CATEGORY_REQUEST,
       CREATE_CATEGORY_SUCCESS,
       CREATE_CATEGORY_FAIL,
     ],
   },
-});
+})};
 
 export const deleteCategory = (id: string) => ({
   type: "API",

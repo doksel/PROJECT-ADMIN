@@ -11,6 +11,7 @@ import { AppDispatchType } from "../../../store/store";
 import {
   getCategoryById,
   createCategory,
+  editCategory
 } from "../../../store/categoryStore/actions";
 import { CategoryType } from "../../../store/categoryStore/reducer";
 
@@ -44,18 +45,16 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const typeParams = params.type
+    const idParams = params.id
 
     handleSubmit((values: CategoryType) => {
       if(typeParams === "create")dispatch(createCategory(values));
-      if(typeParams === "edit")dispatch(createCategory(values));
-      
+      if(typeParams === "edit")dispatch(editCategory(idParams, values));
     })();
 
     history.push("/admin/categories");
     reset();
   };
-
-  console.log(params);
 
   return (
     <>
@@ -75,6 +74,13 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
           type="primary"
           loading={isLoading}
           text="Enter"
+        />
+
+        <Button
+          type="danger"
+          loading={isLoading}
+          text="Cancel"
+          onClick={()=>history.goBack()}
         />
       </form>
     </>
