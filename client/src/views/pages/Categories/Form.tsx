@@ -11,18 +11,11 @@ import { AppDispatchType } from "../../../store/store";
 import {
   getCategoryById,
   createCategory,
-  editCategory
+  editCategory,
 } from "../../../store/categoryStore/actions";
 import { CategoryType } from "../../../store/categoryStore/reducer";
 
-type RootStateType = {
-  categoryStore: any;
-};
-
-type ParamsType = {
-  id: string;
-  type: string;
-};
+import { RootStateFormType, ParamsType } from "./types";
 
 const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   handleSubmit,
@@ -32,7 +25,7 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   let params = useParams<ParamsType>();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateFormType> = useSelector;
   const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
   const category = useTypedSelector((state) => state.categoryStore.category);
 
@@ -44,12 +37,12 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
 
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const typeParams = params.type
-    const idParams = params.id
+    const typeParams = params.type;
+    const idParams = params.id;
 
     handleSubmit((values: CategoryType) => {
-      if(typeParams === "create")dispatch(createCategory(values));
-      if(typeParams === "edit")dispatch(editCategory(idParams, values));
+      if (typeParams === "create") dispatch(createCategory(values));
+      if (typeParams === "edit") dispatch(editCategory(idParams, values));
     })();
 
     history.push("/admin/categories");
@@ -80,7 +73,7 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
           type="danger"
           loading={isLoading}
           text="Cancel"
-          onClick={()=>history.goBack()}
+          onClick={() => history.goBack()}
         />
       </form>
     </>

@@ -37,12 +37,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const data = req.body;
 
-    const article = await Articles.findOneAndUpdate({ _id: id }, { name });
+    const article = await Articles.findOneAndUpdate({ _id: id }, data);
 
     res.status(201).json({ article });
   } catch (err) {

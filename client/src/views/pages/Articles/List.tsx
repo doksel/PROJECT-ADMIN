@@ -8,25 +8,21 @@ import Icon from "../../common/Icon";
 import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
-import { getCategories } from "../../../store/categoryStore/actions";
-
-type RootStateType = {
-  userStore: any;
-  categoryStore: any;
-};
+import { getArticles } from "../../../store/articleStore/actions";
+import { RootStateListType } from "./types";
 
 const List: React.FC = () => {
   let history = useHistory();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
-  const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
-  const categories = useTypedSelector(
-    (state) => state.categoryStore.categories
+  const useTypedSelector: TypedUseSelectorHook<RootStateListType> = useSelector;
+  const isLoading = useTypedSelector((state) => state.articleStore.isLoading);
+  const articles = useTypedSelector(
+    (state) => state.articleStore.categories
   );
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getArticles());
   }, []);
 
   return (
@@ -35,16 +31,16 @@ const List: React.FC = () => {
         <MainLoader />
       ) : (
         <Table
-          title="Categories"
+          title="Articles"
           columns={[
             { title: "Name", field: "name" },
             { title: "Create", field: "createAt" },
             { title: "Owner", field: "ownerId" },
           ]}
-          data={categories}
-          onView={(id) => history.push(`/admin/categories/${id}/view`)}
-          onEdit={(id) => history.push(`/admin/categories/${id}/edit`)}
-          onDelete={(id) => history.push(`/admin/categories/delete/${id}`)}
+          data={articles}
+          onView={(id: string) => history.push(`/admin/categories/${id}/view`)}
+          onEdit={(id: string) => history.push(`/admin/categories/${id}/edit`)}
+          onDelete={(id: string) => history.push(`/admin/categories/delete/${id}`)}
           actions={[
             {
               icon: () => (

@@ -18,8 +18,9 @@ type ErrorsType = {
 };
 
 export type ArticleType = {
-  name: string;
+  title: string;
   description: string;
+  categoryId: string;
   owner: string;
 };
 

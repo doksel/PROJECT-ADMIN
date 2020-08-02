@@ -20,8 +20,10 @@ export const ErrorHandler = (errors) => {
     data.error = "Bad request";
   } else if (response.status === HttpStatusCode.NOT_FOUND) {
     data.error = "Not found";
-  } else if (response.status === HttpStatusCode.NOT_FORBIDEN) {
+  } else if (response.status === HttpStatusCode.FORBBIDEN) {
     data.error = "Not forbiden";
+  } else if (response.status === HttpStatusCode.UNAUTHERIZED) {
+    data.error = "Unaythorized";
   } else {
     data.status = 500;
     data.error = "Server error";

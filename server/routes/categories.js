@@ -26,8 +26,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { name } = req.body;
-    const category = new Categories({ name });
+    const data = req.body;
+    const category = new Categories(data);
 
     await category.save();
 
@@ -40,9 +40,9 @@ router.post("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const data = req.body;
 
-    const category = await Categories.findOneAndUpdate({ _id: id }, { name });
+    const category = await Categories.findOneAndUpdate({ _id: id }, data);
 
     res.status(201).json({ category });
   } catch (err) {

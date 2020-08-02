@@ -9,17 +9,13 @@ import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
 import { getCategories } from "../../../store/categoryStore/actions";
-
-type RootStateType = {
-  userStore: any;
-  categoryStore: any;
-};
+import { RootStateListType } from "./types";
 
 const List: React.FC = () => {
   let history = useHistory();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateListType> = useSelector;
   const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
   const categories = useTypedSelector(
     (state) => state.categoryStore.categories
@@ -42,9 +38,11 @@ const List: React.FC = () => {
             { title: "Owner", field: "ownerId" },
           ]}
           data={categories}
-          onView={(id) => history.push(`/admin/categories/${id}/view`)}
-          onEdit={(id) => history.push(`/admin/categories/${id}/edit`)}
-          onDelete={(id) => history.push(`/admin/categories/delete/${id}`)}
+          onView={(id: string) => history.push(`/admin/categories/${id}/view`)}
+          onEdit={(id: string) => history.push(`/admin/categories/${id}/edit`)}
+          onDelete={(id: string) =>
+            history.push(`/admin/categories/delete/${id}`)
+          }
           actions={[
             {
               icon: () => (

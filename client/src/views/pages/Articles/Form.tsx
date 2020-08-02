@@ -9,19 +9,12 @@ import Input from "../../common/Input";
 import { required } from "../../../helpers/validate";
 import { AppDispatchType } from "../../../store/store";
 import {
-  getCategoryById,
-  createCategory,
-} from "../../../store/categoryStore/actions";
+  getArticleById,
+  createArticle,
+} from "../../../store/articleStore/actions";
 import { ArticleType } from "../../../store/articleStore/reducer";
 
-type RootStateType = {
-  categoryStore: any;
-};
-
-type ParamsType = {
-  id: string;
-  type: string;
-};
+import { RootStateFormType, ParamsType } from "./types";
 
 const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   handleSubmit,
@@ -31,24 +24,23 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   let params = useParams<ParamsType>();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
-  const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
-  const category = useTypedSelector((state) => state.categoryStore.category);
+  const useTypedSelector: TypedUseSelectorHook<RootStateFormType> = useSelector;
+  const isLoading = useTypedSelector((state) => state.articleStore.isLoading);
+  const category = useTypedSelector((state) => state.articleStore.category);
 
   useEffect(() => {
     if (params.type !== "create") {
-      dispatch(getCategoryById(params.id));
+      dispatch(getArticleById(params.id));
     }
   }, []);
 
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const typeParams = params.type
+    const typeParams = params.type;
 
     handleSubmit((values: ArticleType) => {
-      if(typeParams === "create")dispatch(createCategory(values));
-      if(typeParams === "edit")dispatch(createCategory(values));
-      
+      if (typeParams === "create") dispatch(createArticle(values));
+      if (typeParams === "edit") dispatch(createArticle(values));
     })();
 
     history.push("/admin/categories");
