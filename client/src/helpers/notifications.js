@@ -1,7 +1,7 @@
 const MESSAGES = {
   MESSAGE_DURATION: 5000,
   SUCCESS_TEXT: "Успішно...",
-  ERROR_TEXT: "Щось пішло не так. Спробуйте пізніше"
+  ERROR_TEXT: "Щось пішло не так. Спробуйте пізніше",
 };
 
 class Message {

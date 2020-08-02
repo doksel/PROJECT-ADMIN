@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Categories from "../models/Categories";
+import { ErrorHandler } from "../middlewares/helpers";
 
 const router = Router();
 
@@ -8,18 +9,18 @@ router.get("/", async (req, res) => {
     const categories = await Categories.find({});
     res.json({ categories });
   } catch (err) {
-    res.status(500).json({ message: "Error 500", errors: err });
+    res.json(ErrorHandler(err));
   }
 });
 
 router.get("/:id", async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     const category = await Categories.findById(id);
 
     res.json({ category });
   } catch (err) {
-    res.status(500).json({ message: "Error 500", errors: err });
+    res.json(ErrorHandler(err));
   }
 });
 
@@ -32,35 +33,31 @@ router.post("/", async (req, res) => {
 
     res.status(201).json({ message: "Category was created" });
   } catch (err) {
-    res.status(500).json({ message: "Error 500", errors: err });
+    res.json(ErrorHandler(err));
   }
 });
 
 router.patch("/:id", async (req, res) => {
-
   try {
     const { id } = req.params;
     const { name } = req.body;
 
-    const category = await Categories.findOneAndUpdate(
-       {_id: id },
-       { name }
-    );
+    const category = await Categories.findOneAndUpdate({ _id: id }, { name });
 
     res.status(201).json({ category });
   } catch (err) {
-    res.status(500).json({ message: "Error 500", errors: err });
+    res.json(ErrorHandler(err));
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
-    const id = req.params.id;
-    const category = await Categories.findByIdAndDelete(id);
+    const { id } = req.params;
+    await Categories.findByIdAndDelete(id);
 
     res.status(201).json({ message: "Category was deleted" });
   } catch (err) {
-    res.status(500).json({ message: "Error 500", errors: err });
+    res.json(ErrorHandler(err));
   }
 });
 

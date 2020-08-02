@@ -11,7 +11,10 @@
     "import/no-extraneous-dependencies": 0,
     "flowtype/no-types-missing-file-annotation": 0,
     "react/react-in-jsx-scope": 0,
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "arrow-parens": ["error", "as-needed"],
+    "arrow-body-style": ["error", "as-needed"],
+    "comma-dangle": ["error", "never"]
   },
   "settings": {
     "import/resolver": "webpack",
