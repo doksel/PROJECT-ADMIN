@@ -20,6 +20,7 @@ type ErrorsType = {
 export type CategoryType = {
   name: string;
   owner: string;
+  _id: string;
 };
 
 const initialState = {

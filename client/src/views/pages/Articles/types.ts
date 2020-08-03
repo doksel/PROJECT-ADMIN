@@ -1,10 +1,7 @@
-export type RootStateListType = {
+export type RootStateType = {
   userStore: any;
   articleStore: any;
-};
-
-export type RootStateFormType = {
-  articleStore: any;
+  categoryStore: any;
 };
 
 export type ParamsType = {

@@ -11,6 +11,7 @@ import Main from "../Main";
 import User from "../User";
 import Account from "../Account";
 import Categories from "../Categories";
+import Articles from "../Articles";
 
 type RootState = {
   authStore: any;
@@ -34,6 +35,11 @@ const Admin: React.FC = () => {
           exact
           render={() => <Categories />}
         />}
+        <Route
+          path="/admin/articles/:id?/:type?"
+          exact
+          render={() => <Articles />}
+        />
       </Content>
 
       <Footer />

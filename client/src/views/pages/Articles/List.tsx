@@ -9,16 +9,16 @@ import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
 import { getArticles } from "../../../store/articleStore/actions";
-import { RootStateListType } from "./types";
+import { RootStateType } from "./types";
 
 const List: React.FC = () => {
   let history = useHistory();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateListType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
   const isLoading = useTypedSelector((state) => state.articleStore.isLoading);
   const articles = useTypedSelector(
-    (state) => state.articleStore.categories
+    (state) => state.articleStore.articles
   );
 
   useEffect(() => {
@@ -38,17 +38,17 @@ const List: React.FC = () => {
             { title: "Owner", field: "ownerId" },
           ]}
           data={articles}
-          onView={(id: string) => history.push(`/admin/categories/${id}/view`)}
-          onEdit={(id: string) => history.push(`/admin/categories/${id}/edit`)}
-          onDelete={(id: string) => history.push(`/admin/categories/delete/${id}`)}
+          onView={(id: string) => history.push(`/admin/articles/${id}/view`)}
+          onEdit={(id: string) => history.push(`/admin/articles/${id}/edit`)}
+          onDelete={(id: string) => history.push(`/admin/articles/delete/${id}`)}
           actions={[
             {
               icon: () => (
                 <Icon onClick={() => history.push("form")} icon={AddIcon} />
               ),
-              tooltip: "Add Category",
+              tooltip: "Add Article",
               isFreeAction: true,
-              onClick: () => history.push(`/admin/categories/0/create`),
+              onClick: () => history.push(`/admin/articles/0/create`),
             },
           ]}
         />

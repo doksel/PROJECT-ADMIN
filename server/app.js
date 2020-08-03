@@ -20,6 +20,7 @@ app.use(express.static(path.resolve(__dirname, "..", "build")));
 app.use(path.join(process.env.API_BASE,'/auth'),  routers.auth);
 app.use(path.join(process.env.API_BASE,'/users'),  routers.users);
 app.use(path.join(process.env.API_BASE,'/categories'),  routers.categories);
+app.use(path.join(process.env.API_BASE,'/articles'),  routers.articles);
 app.use(path.join(process.env.API_BASE,'/chat'),  routers.chat);
 
 io.on('connection', (socket) => {

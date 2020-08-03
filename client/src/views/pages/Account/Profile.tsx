@@ -32,6 +32,7 @@ const Profile: React.FC = () => {
           <div>Email: {user.email}</div>
           <Icon onClick={() => history.push("form")} icon={EditIcon} />
           {user.role === "admin" && <Button text="Show categories" onClick={()=>history.push("/admin/categories")}/>}
+          {user.role === "admin" && <Button text="Show articles" onClick={()=>history.push("/admin/articles")}/>}
         </>
       )}
     </>

@@ -5,16 +5,18 @@ import { Field, reduxForm, InjectedFormProps } from "redux-form";
 
 import Button from "../../common/Button";
 import Input from "../../common/Input";
+import Selecter from "../../common/Selecter";
 
 import { required } from "../../../helpers/validate";
+import { setCategoriesOptions } from "../../../helpers";
 import { AppDispatchType } from "../../../store/store";
 import {
   getArticleById,
   createArticle,
 } from "../../../store/articleStore/actions";
+import { getCategories } from "../../../store/categoryStore/actions";
 import { ArticleType } from "../../../store/articleStore/reducer";
-
-import { RootStateFormType, ParamsType } from "./types";
+import { RootStateType, ParamsType } from "./types";
 
 const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   handleSubmit,
@@ -24,11 +26,13 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   let params = useParams<ParamsType>();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateFormType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
   const isLoading = useTypedSelector((state) => state.articleStore.isLoading);
-  const category = useTypedSelector((state) => state.articleStore.category);
+  const article = useTypedSelector((state) => state.articleStore.article);
+  const categories = useTypedSelector((state) => state.categoryStore.categories);
 
   useEffect(() => {
+    dispatch(getCategories());
     if (params.type !== "create") {
       dispatch(getArticleById(params.id));
     }
@@ -43,11 +47,9 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
       if (typeParams === "edit") dispatch(createArticle(values));
     })();
 
-    history.push("/admin/categories");
+    history.push("/admin/articles");
     reset();
   };
-
-  console.log(params);
 
   return (
     <>
@@ -56,7 +58,7 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
         <Field
           name="title"
           component={Input}
-          defaultValue={category && category.name}
+          defaultValue={article && article.name}
           label="Article's name"
           placeholder="Enter name of articles"
           validate={[required]}
@@ -65,9 +67,19 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
         <Field
           name="description"
           component={Input}
-          defaultValue={category && category.name}
+          defaultValue={article && article.description}
           label="Article's description"
           placeholder="Enter description of articles"
+          validate={[required]}
+        />
+
+        <Field
+          name="categoryId"
+          component={Selecter}
+          defaultValue={article && article.categoryId}
+          options={setCategoriesOptions(categories)}
+          label="Article's category"
+          placeholder="Choose category of articles"
           validate={[required]}
         />
 
@@ -76,6 +88,13 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
           type="primary"
           loading={isLoading}
           text="Enter"
+        />
+
+        <Button
+          type="danger"
+          loading={isLoading}
+          text="Cancel"
+          onClick={() => history.goBack()}
         />
       </form>
     </>
