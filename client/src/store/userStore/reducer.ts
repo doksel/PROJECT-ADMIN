@@ -18,6 +18,8 @@ type UserType = {
   firstName: string;
   lastName: string;
   email: string;
+  avatar: string;
+  role?: string;
 };
 
 const initialState = {

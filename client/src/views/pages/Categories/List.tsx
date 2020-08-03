@@ -9,13 +9,13 @@ import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
 import { getCategories } from "../../../store/categoryStore/actions";
-import { RootStateListType } from "./types";
+import { RootStateType } from "./types";
 
 const List: React.FC = () => {
   let history = useHistory();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateListType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
   const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
   const categories = useTypedSelector(
     (state) => state.categoryStore.categories

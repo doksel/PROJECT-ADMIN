@@ -15,7 +15,7 @@ import {
 } from "../../../store/categoryStore/actions";
 import { CategoryType } from "../../../store/categoryStore/reducer";
 
-import { RootStateFormType, ParamsType } from "./types";
+import { RootStateType, ParamsType } from "./types";
 
 const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   handleSubmit,
@@ -25,7 +25,7 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
   let params = useParams<ParamsType>();
 
   const dispatch: AppDispatchType = useDispatch();
-  const useTypedSelector: TypedUseSelectorHook<RootStateFormType> = useSelector;
+  const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector;
   const isLoading = useTypedSelector((state) => state.categoryStore.isLoading);
   const category = useTypedSelector((state) => state.categoryStore.category);
 
