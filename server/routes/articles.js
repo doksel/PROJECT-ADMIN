@@ -24,10 +24,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", getTokenFromHeader, async (req, res) => {
   try {
     const data = req.body;
-    const userId = getTokenFromHeader(req).userId;
+    const userId = req.user.userId;
     const article = new Articles({...data, owner: userId});
 
     await article.save();

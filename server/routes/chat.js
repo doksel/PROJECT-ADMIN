@@ -10,9 +10,10 @@ const router = Router();
 const chat = [];
 
 router.get('/',
+getTokenFromHeader,
 async (req,res)=>{  
   try{
-    const userId = jwt.verify(getTokenFromHeader(req), secretJwt).userId;
+    const userId = req.user.userId;
 
     res.json({chat})
   }catch (err) {
@@ -21,9 +22,10 @@ async (req,res)=>{
 })
 
 router.post('/',
+getTokenFromHeader,
 async (req,res)=>{
   try{
-    const userId = jwt.verify(getTokenFromHeader(req), secretJwt).userId;
+    const userId = req.user.userId;
     const {id, lastName} = req.body.id
 
     res.json({chat})

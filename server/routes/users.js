@@ -6,9 +6,9 @@ import User from "../models/User";
 
 const router = Router();
 
-router.get("/all", async (req, res) => {
+router.get("/", getTokenFromHeader, async (req, res) => {
   try {
-    const userId = getTokenFromHeader(req).userId;
+    const userId = req.user.userId;
     const AllUsers = await User.find({});
     const users = AllUsers.filter((user) => user.id !== userId);
 
@@ -29,9 +29,9 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
-router.get("/account", async (req, res) => {
+router.get("/account", getTokenFromHeader, async (req, res) => {
   try {
-    const userId = getTokenFromHeader(req).userId;
+    const userId = req.user.userId;
     const user = await User.findById(userId);
 
     if (!user) {

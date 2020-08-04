@@ -17,7 +17,7 @@ export const getUsers = () => ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
-      urlParams: `/users/all`
+      urlParams: `/users/`
     },
     variables: null,
     actions: [GET_USERS_REQUEST, GET_USERS_SUCCESS, GET_USERS_FAIL]

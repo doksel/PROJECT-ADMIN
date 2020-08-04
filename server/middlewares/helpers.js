@@ -2,17 +2,24 @@ import { HttpStatusCode } from "./constants";
 import jwt from "jsonwebtoken";
 import { secretJwt } from "../config";
 
-export const getTokenFromHeader = (req) => {
-  if (
-    req.headers.authorization
-  ) {
-    const token = req.headers.authorization.split(" ")[1]
-    const decoded = jwt.verify(token, secretJwt)
-
-    return decoded;
+export const getTokenFromHeader = (req, res, next) => {
+  if(req.method === "OPTIONS"){
+    return next()
   }
-  
-  return req;
+
+  try {
+    const token = req.headers.authorization.split(" ")[1]
+
+    if(!token){
+      res.status(401).json({message: "Not authorization"})
+    }
+
+    const decoded = jwt.verify(token, secretJwt)
+    req.user = decoded;
+    next();
+  } catch(err) {
+    res.status(401).json({message: "Not authorization"})
+  }
 };
 
 export const ErrorHandler = (errors) => {
