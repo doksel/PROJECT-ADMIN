@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const categories = await Categories.find({});
     res.json({ categories });
   } catch (err) {
-    res.json(ErrorHandler(err));
+    res.json(err);
   }
 });
 
@@ -20,7 +20,7 @@ router.get("/:id", async (req, res) => {
 
     res.json({ category });
   } catch (err) {
-    res.json(ErrorHandler(err));
+    res.json(err);
   }
 });
 
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json({ message: "Category was created" });
   } catch (err) {
-    res.json(ErrorHandler(err));
+    res.json(err);
   }
 });
 
@@ -46,7 +46,7 @@ router.patch("/:id", async (req, res) => {
 
     res.status(201).json({ category });
   } catch (err) {
-    res.json(ErrorHandler(err));
+    res.json(err);
   }
 });
 
@@ -57,7 +57,7 @@ router.delete("/:id", async (req, res) => {
 
     res.status(201).json({ message: "Category was deleted" });
   } catch (err) {
-    res.json(ErrorHandler(err));
+    res.json(err);
   }
 });
 

@@ -60,21 +60,26 @@ const Form: React.FC<InjectedFormProps<CategoryType>> = ({
           label="Category's name"
           placeholder="Enter name of category"
           validate={[required]}
+          disabled={params.type === "view"}
         />
 
-        <Button
-          htmlType="submit"
-          type="primary"
-          loading={isLoading}
-          text="Enter"
-        />
+        {params.type !== "view" && (
+          <>
+            <Button
+              htmlType="submit"
+              type="primary"
+              loading={isLoading}
+              text="Enter"
+            />
 
-        <Button
-          type="danger"
-          loading={isLoading}
-          text="Cancel"
-          onClick={() => history.goBack()}
-        />
+            <Button
+              type="danger"
+              loading={isLoading}
+              text="Cancel"
+              onClick={() => history.goBack()}
+            />
+          </>
+        )}
       </form>
     </>
   );

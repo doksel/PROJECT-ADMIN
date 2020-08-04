@@ -13,6 +13,7 @@ import { AppDispatchType } from "../../../store/store";
 import {
   getArticleById,
   createArticle,
+  editArticle
 } from "../../../store/articleStore/actions";
 import { getCategories } from "../../../store/categoryStore/actions";
 import { ArticleType } from "../../../store/articleStore/reducer";
@@ -30,6 +31,7 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   const isLoading = useTypedSelector((state) => state.articleStore.isLoading);
   const article = useTypedSelector((state) => state.articleStore.article);
   const categories = useTypedSelector((state) => state.categoryStore.categories);
+  const user = useTypedSelector((state) => state.authStore.user);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -41,10 +43,11 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
   const formSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const typeParams = params.type;
+    const idParams = params.id;
 
     handleSubmit((values: ArticleType) => {
       if (typeParams === "create") dispatch(createArticle(values));
-      if (typeParams === "edit") dispatch(createArticle(values));
+      if (typeParams === "edit") dispatch(editArticle(idParams, values));
     })();
 
     history.push("/admin/articles");
@@ -58,10 +61,11 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
         <Field
           name="title"
           component={Input}
-          defaultValue={article && article.name}
+          defaultValue={article && article.title}
           label="Article's name"
           placeholder="Enter name of articles"
           validate={[required]}
+          disabled={params.type === "view"}
         />
 
         <Field
@@ -83,19 +87,23 @@ const Form: React.FC<InjectedFormProps<ArticleType>> = ({
           validate={[required]}
         />
 
-        <Button
-          htmlType="submit"
-          type="primary"
-          loading={isLoading}
-          text="Enter"
-        />
+        {params.type !== "view" && (
+          <>
+            <Button
+              htmlType="submit"
+              type="primary"
+              loading={isLoading}
+              text="Enter"
+            />
 
-        <Button
-          type="danger"
-          loading={isLoading}
-          text="Cancel"
-          onClick={() => history.goBack()}
-        />
+            <Button
+              type="danger"
+              loading={isLoading}
+              text="Cancel"
+              onClick={() => history.goBack()}
+            />
+          </>
+        )}
       </form>
     </>
   );

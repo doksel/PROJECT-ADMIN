@@ -1,5 +1,5 @@
 export type RootStateType = {
-  userStore: any;
+  authStore: any;
   articleStore: any;
   categoryStore: any;
 };

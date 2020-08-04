@@ -77,7 +77,7 @@ export const createArticle = (payload: ArticleType) => ({
   },
 });
 
-export const editArticle = (id: string) => ({
+export const editArticle = (id: string, payload: ArticleType) => ({
   type: "API",
   payload: {
     query: {
@@ -87,9 +87,9 @@ export const editArticle = (id: string) => ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      urlParams: `/articles`,
+      urlParams: `/articles/${id}`,
     },
-    variables: id,
+    variables: payload,
     actions: [
       CREATE_ARTICLE_REQUEST,
       CREATE_ARTICLE_SUCCESS,

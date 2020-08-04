@@ -15,5 +15,3 @@ export const breakpointsLayout: breakpointsLayoutTypes = {
   xl: "1440px",
   xxl: "1600px"
 };
-
-export const ERROR_MESSAGE: string = "Щось пішло не так. Спробуйте пізніше";

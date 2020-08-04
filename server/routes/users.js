@@ -1,8 +1,6 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
 
 import { getTokenFromHeader, ErrorHandler } from "../middlewares/helpers";
-import { secretJwt } from "../config";
 
 import User from "../models/User";
 
@@ -10,7 +8,7 @@ const router = Router();
 
 router.get("/all", async (req, res) => {
   try {
-    const userId = jwt.verify(getTokenFromHeader(req), secretJwt).userId;
+    const userId = getTokenFromHeader(req).userId;
     const AllUsers = await User.find({});
     const users = AllUsers.filter((user) => user.id !== userId);
 
@@ -33,7 +31,7 @@ router.get("/user/:id", async (req, res) => {
 
 router.get("/account", async (req, res) => {
   try {
-    const userId = jwt.verify(getTokenFromHeader(req), secretJwt).userId;
+    const userId = getTokenFromHeader(req).userId;
     const user = await User.findById(userId);
 
     if (!user) {

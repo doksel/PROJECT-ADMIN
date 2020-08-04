@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import moment from "moment";
 
 import Table from "../../components/Table";
 import MainLoader from "../../components/MainLoader";
@@ -9,6 +10,8 @@ import AddIcon from "../../../images/icons/add.svg";
 
 import { AppDispatchType } from "../../../store/store";
 import { getArticles } from "../../../store/articleStore/actions";
+import {FORMAT_DATA} from "../../../helpers/constants";
+
 import { RootStateType } from "./types";
 
 const List: React.FC = () => {
@@ -33,9 +36,10 @@ const List: React.FC = () => {
         <Table
           title="Articles"
           columns={[
-            { title: "Name", field: "name" },
-            { title: "Create", field: "createAt" },
-            { title: "Owner", field: "ownerId" },
+            { title: "Name", field: "title" },
+            { title: "Create", render: (rowData: any) => <div>{moment(rowData.createdAt).format(FORMAT_DATA)}</div> },
+            { title: "Owner", render: (rowData: any) => <div>{rowData.owner && rowData.owner.name}</div> },
+            { title: "Category", field: "categoryId" },
           ]}
           data={articles}
           onView={(id: string) => history.push(`/admin/articles/${id}/view`)}

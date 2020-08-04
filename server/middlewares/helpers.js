@@ -1,12 +1,18 @@
 import { HttpStatusCode } from "./constants";
+import jwt from "jsonwebtoken";
+import { secretJwt } from "../config";
 
 export const getTokenFromHeader = (req) => {
   if (
-    req.headers.authorization &&
-    req.headers.authorization.split(" ")[0] === "Bearer"
+    req.headers.authorization
   ) {
-    return req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1]
+    const decoded = jwt.verify(token, secretJwt)
+
+    return decoded;
   }
+  
+  return req;
 };
 
 export const ErrorHandler = (errors) => {

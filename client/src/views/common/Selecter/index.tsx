@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 import {PropsTypes, ValueTypes} from "./types";
@@ -9,9 +9,13 @@ const Selecter: React.FC<PropsTypes> = ({
   meta: {touched, error}, 
   placeholder, 
   options = [],
+  defaultValue,
   disabled
 }) => {
   const [selectedOption, setselectedOption] = useState<ValueTypes | null>(null)
+  useEffect(()=>{
+    defaultValue && input.onChange(defaultValue);
+  },[]);
 
   return (
     <div>

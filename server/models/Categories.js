@@ -1,17 +1,13 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 const schema = new Schema(
-  {name: { type: String, required: true }},
-  { timestamps: true }
+  {
+    id: {type: Types.ObjectId, required: true, unique: true, auto: true },
+    name: { type: String, required: true }
+  },
+  { timestamps: true,
+    _v: false
+  }
 );
-
-schema.method("transform", function () {
-  let obj = this.toObject();
-
-  obj.id = obj._id;
-  delete obj._id;
-
-  return obj;
-});
 
 export default model("Categories", schema);
