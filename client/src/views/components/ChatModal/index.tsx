@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { Save, Close, Person } from "@material-ui/icons";
 import socket from "../../../helpers/socket";
@@ -29,11 +29,17 @@ const Chat: React.FC = () => {
     const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
     const isActive = useTypedSelector(state => state.chatStore.isActive);
 
+    useEffect(()=>{
+        // console.log(socket)
+    },[])
+
     const onSave = () => {
-        console.log(value);
+        const data = {
+            user: "dddd",
+            msg: value
+        }
         
-        socket.emit('chat message', value)
-        dispatch({ type: 'SHOW_CHAT', payload: {isActive: false} })
+        socket.emit('CHAT', value)        
         setValue('')
     }
 
@@ -65,7 +71,6 @@ const Chat: React.FC = () => {
                     </MessageBody>
                     </Message>
                 ))}
-
             </Content>
         </WrapContent>
         

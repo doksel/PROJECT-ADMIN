@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import MainLoader from "../../components/MainLoader";
-import Icon from "../../common/Icon";
+import MainLoader from "../../../components/MainLoader";
+import Icon from "../../../common/Icon";
 import EditIcon from "../../../images/icons/edit-tools.svg";
 
-import { AppDispatchType } from "../../../store/store";
-import { getUserById } from "../../../store/userStore/actions";
+import { AppDispatchType } from "../../../../store/store";
+import { getUserById } from "../../../../store/userStore/actions";
 
 type RootStateType = {
   userStore: any;

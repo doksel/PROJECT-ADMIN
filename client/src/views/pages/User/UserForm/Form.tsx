@@ -15,7 +15,7 @@ type CustomPropsType = {
   error: boolean;
 };
 
-const Form: React.FC<{} & CustomPropsType> = ({
+const Form: React.FC<CustomPropsType> = ({
   loading,
   onSubmit,
   message,

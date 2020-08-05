@@ -22,15 +22,16 @@ app.use(path.join(process.env.API_BASE,'/users'),  routers.users);
 app.use(path.join(process.env.API_BASE,'/categories'),  routers.categories);
 app.use(path.join(process.env.API_BASE,'/articles'),  routers.articles);
 app.use(path.join(process.env.API_BASE,'/chat'),  routers.chat);
+app.use(path.join(process.env.API_BASE,'/upload'),  routers.upload);
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
-
+  console.log('a user connected', socket.id);
+  
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 
-  socket.on('chat message', (msg) => {
+  socket.on('CHAT', (msg) => {
     console.log('message: ' + msg);
   });
 });

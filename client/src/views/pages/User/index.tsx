@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import Profile from "./Profile";
-import Form from "./Form";
+import Profile from "./UserProfile";
+import Form from "./UserForm";
 
 const User: React.FC = () => (
   <>

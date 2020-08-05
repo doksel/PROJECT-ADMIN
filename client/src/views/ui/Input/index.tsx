@@ -1,14 +1,9 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 
-import { InputTypes } from "../../common/Input";
+import { InputTypes } from "../../common/Input/types";
+import {CustomInputTypes} from "./types";
+
 import { WrapInput } from "./styles";
-
-type CustomInputTypes = {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  touched: boolean;
-  error: string;
-  onKeyUp?: any;
-};
 
 const InputUI: React.FC<InputTypes & CustomInputTypes> = ({
   placeholder,

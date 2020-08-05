@@ -1,31 +1,10 @@
 import React, { FormEvent, ChangeEvent, useEffect } from "react";
-import {
-  WrappedFieldInputProps,
-  WrappedFieldMetaProps
-} from "redux-form/lib/Field";
 
 import InputUI from "../../ui/Input";
+
+import { CustomInputTypes, InputTypes } from "./types";
+
 import { WrapInput } from "./styles";
-
-type CustomInputTypes = {
-  input: WrappedFieldInputProps;
-  meta: WrappedFieldMetaProps;
-  defaultValue: string | number;
-  required: boolean;
-  initialValue: string | number;
-  notification: string;
-  invisible: boolean;
-  label: string;
-};
-
-export type InputTypes = {
-  type?: string;
-  placeholder?: string;
-  initValue?: string;
-  disabled?: boolean;
-  maxLength?: number;
-  mask?: (e: FormEvent<HTMLFormElement>, input: WrappedFieldInputProps) => void;
-};
 
 const Input: React.FC<InputTypes & CustomInputTypes> = ({
   label,
