@@ -7,13 +7,12 @@ import Chat from "../models/Chat";
 
 const router = Router();
 
-const chat = [];
-
 router.get('/',
 getTokenFromHeader,
 async (req,res)=>{  
   try{
     const userId = req.user.userId;
+    const chat = await Chat.find({});
 
     res.json({chat})
   }catch (err) {

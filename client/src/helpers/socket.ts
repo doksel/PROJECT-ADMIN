@@ -1,6 +1,6 @@
 import io from "socket.io-client";
-import { API_URL } from "../services/api";
+import { host } from "../services/api";
 
-const socket = io(`${API_URL}/chat`);
+const socket = io(host);
 
 export default socket;

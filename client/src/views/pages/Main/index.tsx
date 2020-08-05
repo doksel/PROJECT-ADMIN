@@ -9,7 +9,7 @@ import ManIcon from "../../../images/icons/man.svg";
 
 
 import { getUsers } from "../../../store/userStore/actions";
-import { openChat, getChat } from "../../../store/chatStore/actions";
+import { openChat } from "../../../store/chatStore/actions";
 
 import { WrapMainTitle, MainTitle, ChatButton } from "./styles";
 
@@ -34,8 +34,7 @@ const Main: React.FC = () => {
   }, []);
 
   const handleClick = () => {
-    dispatch(openChat(profile && {id: profile._id, lastName: profile.lastName}));
-    dispatch(getChat());
+    // dispatch(openChat(profile && {id: profile._id, lastName: profile.lastName}));
     dispatch({ type: 'SHOW_CHAT', payload: {isActive: true} })
   }
 

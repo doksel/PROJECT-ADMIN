@@ -17,11 +17,16 @@ type ErrorsType = {
   location: string;
 };
 
+export type ChatType = {
+  name: string;
+  message: string;
+}
+
 const initialState = {
   isActive: false,
   errors: null as ErrorsType | null,
   isLoading: false,
-  message: null as string | null
+  chat: [] as Array<ChatType> | []
 };
 
 export type InitialStateChatType = typeof initialState;
@@ -53,10 +58,31 @@ export default (
       return {
         ...state,
         isLoading: false,
-        message: payload.message
+        chat: payload.chat
       };
 
     case SEND_TO_CHAT_FAIL:
+      return {
+        ...state,
+        errors: payload.errors,
+        isLoading: false
+      };
+
+    case GET_CHAT_REQUEST:
+      return {
+        ...state,
+        errors: null,
+        isLoading: true
+      };
+
+    case GET_CHAT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        chat: payload.chat
+      };
+
+    case GET_CHAT_FAIL:
       return {
         ...state,
         errors: payload.errors,

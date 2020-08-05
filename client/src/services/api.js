@@ -1,4 +1,4 @@
-export const host = process.env.REACT_APP_SERVER_HOST;
+export const host = `${process.env.REACT_APP_SERVER_HOST}`;
 export const API_URL = `${host}/v1/api`;
 
 export const client = (variables, query) => {

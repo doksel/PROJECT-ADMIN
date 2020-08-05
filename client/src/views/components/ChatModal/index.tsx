@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { Save, Close, Person } from "@material-ui/icons";
+
 import socket from "../../../helpers/socket";
+import { getChat } from "../../../store/chatStore/actions";
+
+import {RootState} from "./types";
+import {ChatType} from "../../../store/chatStore/reducer";
 
 import { 
     WrapChatModal, 
@@ -18,36 +23,29 @@ import {
     Textarea
 } from "./styles";
 
-
-type RootState = {
-    chatStore: any;
-};
-
 const Chat: React.FC = () => {
     const [value, setValue] = useState<string>('')
     const dispatch = useDispatch();
     const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
     const isActive = useTypedSelector(state => state.chatStore.isActive);
+    const chat = useTypedSelector(state => state.chatStore.chat);
+    const user = useTypedSelector(state => state.authStore.user);
 
     useEffect(()=>{
-        // console.log(socket)
-    },[])
+        dispatch(getChat());
+    },[chat && chat.length])
+    console.log(chat);
 
     const onSave = () => {
         const data = {
-            user: "dddd",
-            msg: value
+            name: user && user.lastName,
+            message: value
         }
+        console.log(data);
         
-        socket.emit('CHAT', value)        
+        socket.emit('CHAT', data)        
         setValue('')
     }
-
-    const data = [
-        {userName: "Vlad", message: "message 1"},
-        {userName: "Name", message: "message 2"},
-        {userName: "Vasia", message: "message 3"}
-    ]
 
   return (
     <WrapChatModal active={isActive}>
@@ -59,15 +57,15 @@ const Chat: React.FC = () => {
 
         <WrapContent>
             <Content>
-                {data.map((message, index) => (
+                {chat.map((user: ChatType, index: number) => (
                     <Message key={index}>
                     <Avatar>
                         <Person />
                     </Avatar>
 
                     <MessageBody>
-                        <NameUser>{message.userName}</NameUser>
-                        <MessageText>{message.message}</MessageText>
+                        <NameUser>{user.name}</NameUser>
+                        <MessageText>{user.message}</MessageText>
                     </MessageBody>
                     </Message>
                 ))}

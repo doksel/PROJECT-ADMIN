@@ -7,6 +7,7 @@ import cors from "cors";
 import { isProduction } from "./config";
 
 import * as routers from "./routes";
+import Chat from "./models/Chat";
 
 const app = express();
 export const server = http.Server(app);
@@ -31,8 +32,14 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  socket.on('CHAT', (msg) => {
-    console.log('message: ' + msg);
+  socket.on('CHAT', async (data) => {
+    try{
+      const chat = new Chat(data);
+      await chat.save();
+      console.log(chat);
+    }catch (err) {
+      console.log(err);
+    }
   });
 });
 
