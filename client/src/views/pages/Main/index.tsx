@@ -9,7 +9,7 @@ import ManIcon from "../../../images/icons/man.svg";
 
 
 import { getUsers } from "../../../store/userStore/actions";
-import { openChat } from "../../../store/chatStore/actions";
+import { openChat, getChat } from "../../../store/chatStore/actions";
 
 import { WrapMainTitle, MainTitle, ChatButton } from "./styles";
 
@@ -31,6 +31,7 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getChat());
   }, []);
 
   const handleClick = () => {

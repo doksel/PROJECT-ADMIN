@@ -79,7 +79,7 @@ export default (
       return {
         ...state,
         isLoading: false,
-        chat: payload.chat
+        chat: [...payload.chat]
       };
 
     case GET_CHAT_FAIL:

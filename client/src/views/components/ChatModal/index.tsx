@@ -30,22 +30,24 @@ const Chat: React.FC = () => {
     const isActive = useTypedSelector(state => state.chatStore.isActive);
     const chat = useTypedSelector(state => state.chatStore.chat);
     const user = useTypedSelector(state => state.authStore.user);
-
+    
     useEffect(()=>{
         dispatch(getChat());
-    },[chat && chat.length])
-    console.log(chat);
+    },[])
 
     const onSave = () => {
         const data = {
             name: user && user.lastName,
             message: value
         }
-        console.log(data);
         
         socket.emit('CHAT', data)        
         setValue('')
     }
+
+    socket.on('CHATED', (data: Array<ChatType>) => {
+        dispatch({type: "GET_CHAT_SUCCESS", payload: { chat: data }});
+    });
 
   return (
     <WrapChatModal active={isActive}>

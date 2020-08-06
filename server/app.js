@@ -29,14 +29,15 @@ io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
   
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('a user disconnected');
   });
 
   socket.on('CHAT', async (data) => {
     try{
       const chat = new Chat(data);
       await chat.save();
-      console.log(chat);
+      const chats = await Chat.find({});
+      socket.emit('CHATED', chats);
     }catch (err) {
       console.log(err);
     }
