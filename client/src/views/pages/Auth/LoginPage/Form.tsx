@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Field } from "redux-form";
+import {useTranslation} from "react-i18next";
 
 import Button from "../../../common/Button";
 import Input from "../../../common/Input";
@@ -21,9 +22,11 @@ const Form: React.FC<{} & CustomPropsType> = ({
   message,
   error
 }) => {
+  const {t, i18n} = useTranslation('common');
+
   return (
     <form onSubmit={onSubmit} autoComplete="off">
-      <h1>Sing in</h1>
+      <h1>{t('Sing_in')}</h1>
 
       <Field
         name="email"

@@ -8,6 +8,10 @@ import { App } from "./routes/loadable";
 import * as serviceWorker from "./serviceWorker";
 import { store, history, persistor } from "./store/store";
 import { ThemeProvider, theme } from "./styles/theme";
+
+import {I18nextProvider} from "react-i18next";
+import i18next from "i18next";
+import "./i18next";
 import "./index.less";
 
 ReactDOM.render(
@@ -16,7 +20,9 @@ ReactDOM.render(
       <Provider store={store}>
         {/* <PersistGate persistor={persistor}> */}
         <Router history={history}>
-          <App />
+          <I18nextProvider i18n={i18next}>
+            <App />
+          </I18nextProvider>
         </Router>
         {/* </PersistGate> */}
       </Provider>
