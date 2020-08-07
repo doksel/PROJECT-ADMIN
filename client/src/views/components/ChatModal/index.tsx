@@ -45,7 +45,7 @@ const Chat: React.FC = () => {
         setValue('')
     }
 
-    socket.on('CHATED', (data: Array<ChatType>) => {
+    socket.on('CHATED', (data: Array<ChatType>) => {        
         dispatch({type: "GET_CHAT_SUCCESS", payload: { chat: data }});
     });
 
@@ -59,16 +59,16 @@ const Chat: React.FC = () => {
 
         <WrapContent>
             <Content>
-                {chat.map((user: ChatType, index: number) => (
-                    <Message key={index}>
-                    <Avatar>
-                        <Person />
-                    </Avatar>
+                {chat.map((userChat: ChatType, index: number) => (
+                    <Message key={index} owner={user && (userChat.name == user.lastName)}>
+                        <Avatar owner={user && (userChat.name == user.lastName)}>
+                            <Person />
+                        </Avatar>
 
-                    <MessageBody>
-                        <NameUser>{user.name}</NameUser>
-                        <MessageText>{user.message}</MessageText>
-                    </MessageBody>
+                        <MessageBody owner={user && (userChat.name == user.lastName)}>
+                            <NameUser>{userChat.name}</NameUser>
+                            <MessageText>{userChat.message}</MessageText>
+                        </MessageBody>
                     </Message>
                 ))}
             </Content>

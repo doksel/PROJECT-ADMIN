@@ -6,6 +6,10 @@ type ChatPropsType = {
   active: boolean;
 };
 
+type MessagePropsType = {
+  owner?: boolean;
+};
+
 export const WrapChatModal = styled.div<ChatPropsType>`
   width: 100vw;
   height: 100vh;
@@ -67,14 +71,17 @@ export const WrapButton = styled.div`
   background: ${props =>  props.theme.colors.primary};
 `;
 
-export const Message = styled.div`
+export const Message = styled.div<MessagePropsType>`
   width: 100%;
   display: flex;
   padding: 5px;
   border-bottom: 1px dashed #f0f0f0;
+  border-radius: 5px;
+  flex-flow: ${props =>  props.owner ? "row-reverse" : "inherit"};
+  background-color: ${props =>  props.owner ? "#f3f3f3" : "inherit"};
 `;
 
-export const Avatar = styled.div`
+export const Avatar = styled.div<MessagePropsType>`
   height: 30px;
   min-width: 30px;
   display: flex;
@@ -83,14 +90,15 @@ export const Avatar = styled.div`
   font-size: 20px;
   color: #575757;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: ${props =>  props.owner ? "#fff" : "#f0f0f0"};
   margin-right: 5px;
 `;
 
-export const MessageBody = styled.div`
+export const MessageBody = styled.div<MessagePropsType>`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: ${props =>  props.owner ? "flex-end" : "inherit"};
   padding: 5px;
 `;
 
