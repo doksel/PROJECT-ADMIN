@@ -38,6 +38,7 @@ io.on('connection', (socket) => {
       await chat.save();
       const chats = await Chat.find({});
       socket.emit('CHATED', chats);
+      socket.broadcast.emit('CHATED', chats);
     }catch (err) {
       console.log(err);
     }

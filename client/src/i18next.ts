@@ -1,17 +1,21 @@
 import i18next from "i18next";
 
-import common_ru from "./translations/ru/common.json";
 import common_en from "./translations/en/common.json";
+import common_ru from "./translations/ru/common.json";
+import common_ua from "./translations/ua/common.json";
 
 i18next.init({
-    interpolation: { escapeValue: false },  // React already does escaping
-    lng: 'en',                              // language to use
+    interpolation: { escapeValue: false }, 
+    lng: 'en',                           
     resources: {
         en: {
-            common: common_en               // 'common' is our custom namespace
+            common: common_en
         },
         ru: {
             common: common_ru
+        },
+        ua: {
+            common: common_ua
         },
     },
 });
