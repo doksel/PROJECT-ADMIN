@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type LangPropsType = {
+  active?: boolean;
+};
+
 export const WrapHeader = styled.div`
   display: flex;
   align-items: center;
@@ -31,4 +35,23 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Langs = styled.div`
+  display: flex;
+  align-items: center;
+  border: solid 1px #fff;
+  border-radius: 3px;
+`;
+
+export const Lang = styled.div<LangPropsType>`
+  padding: 3px;
+  border-right: solid 1px #fff;
+  color: ${props => props.active ? "#fff" : props.theme.colors.primary};
+  background: ${props => props.active ? props.theme.colors.primary : "#fff"};
 `;
